@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ActualiteController!{% endblock %}
+
+{% block body %}
+<h1>Dernieres Acualités</h1>
+<div class="actu">
+    <h2>{{ actualite }}</h2>
+    <small>{{ actualite.posterLe | date('d/m/Y H:i:s') }}</small>
+    <p>{{ actualite.contenue }}</p>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Laisser un commentaire
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Commentaire</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(formCommentaire)}}
+                        {{ form_row(formCommentaire.contenue) }}
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        {{ form_row(formCommentaire.envoyer) }}
+                    {{ form_end(formCommentaire) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+{% endblock %}

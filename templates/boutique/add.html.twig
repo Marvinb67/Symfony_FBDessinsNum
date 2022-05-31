@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BoutiqueController!{% endblock %}
+
+{% block body %}
+{{ form_start(formProduit)}}
+    {{ form_row(formProduit.nom) }}
+    {{ form_row(formProduit.image) }}
+    {{ form_row(formProduit.description) }}
+    {{ form_row(formProduit.categorie) }}
+    {{ form_row(formProduit.largeur) }}
+    {{ form_row(formProduit.hauteur) }}
+    {{ form_row(formProduit.prix) }}
+{{ form_end(formProduit) }}
+{% endblock %}

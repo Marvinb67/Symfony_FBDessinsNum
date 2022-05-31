@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BoutiqueController!{% endblock %}
+
+{% block body %}
+<a href="{{ path('add_produit') }}" style="color: black;">Ajouter un produit</a>
+
+<h1>Réalisations</h1>
+
+<div class="card-group">
+    {% for real in produits%}
+    <div class="card">
+        <img src="image/dessins/{{ real.image }}" class="card-img-top" alt="{{ real.nom }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ real.nom }}</h5>
+          <p class="card-text">{{ real.description }}</p>
+          <p class="card-text">{{ real.dimensions }}</p>
+          <p class="card-text">{{ real.prix }} €</p>
+          <a href="#" class="btn btn-primary">Ajouter au panier</a>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+{% endblock %}
