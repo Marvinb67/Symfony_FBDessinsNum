@@ -39,6 +39,11 @@ class Commentaire
      */
     private $actualite;
 
+    public function __construct()
+    {
+        $this->poster_le = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

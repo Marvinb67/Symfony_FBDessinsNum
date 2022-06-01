@@ -149,9 +149,13 @@ footer p{
   /* Add some padding inside the card container */
   .carte-container {
     padding: 2px 16px;
-  }
+}
 
-  .contenue-comment{
+.contenue-comment{
     width: 100%;
     resize: none !important;
-  }
+}
+
+.derniere-actus{
+    display: flex;
+}

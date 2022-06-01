@@ -7,6 +7,18 @@
     <img src="{{ asset('image/dessin/bas-rhin_art-numerique_fayek-bahloul_figuratif-47.jpg') }}" alt="">
     <h1>Fayek Bahloul</h1>
     <p>Artiste spécialisé en dessin assister par ordinateur (DAO)</p>
-    <button class="button"><a href="">Voir mes oeuvres</a></button>
+    <button class="button"><a href="" class="text-dark">Voir mes oeuvres</a></button>
+</div>
+<div class="card-group">
+    {% for actu in actualites %}
+    <div class="card">
+        <div class="card-body">
+          <h2><a href="{{ path('show_actualite', {'id': actu.id}) }}" class="card-title text-secondary">{{ actu }}</a></h2>
+          <p class="card-text">{{ actu.contenue }}</p>
+          <small class="card-text">{{ actu.utilisateur }}</small>
+          <small class="card-text">Poster le : {{ actu.posterLe | date('d-m-Y H:i:s') }}</small>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}

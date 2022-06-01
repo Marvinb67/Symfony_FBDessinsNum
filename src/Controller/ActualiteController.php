@@ -28,41 +28,31 @@ class ActualiteController extends AbstractController
     /**
      * @Route("/actualite/{id}", name="show_actualite")
      */
-    public function show(Actualite $actualite, ManagerRegistry $doctrine, Commentaire $commentaire = null, Request $requete): Response
+    public function show(Actualite $actualite, ManagerRegistry $doctrine, Request $requete): Response
     {
         $em = $doctrine->getManager();
+        $commentaire = new Commentaire();
         $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($requete);
         if ($form->isSubmitted() && $form->isValid()) {
             $commentaire = $form->getData();
+            $commentaire->setUtilisateur($this->getUser());
+            $commentaire->setActualite($actualite);
 
             $em->persist($commentaire);
             $em->flush();
 
-            return $this->redirectToRoute('show_actualite');
+            return $this->redirectToRoute('show_actualite', [
+                'id' => $actualite->getId(),
+            ]);
         }
+
+        $commentaire_list = $actualite->getCommentaires();
 
         return $this->render('actualite/show.html.twig', [
             'actualite' => $actualite,
             'formCommentaire' => $form->createView(),
+            'commentaire_list' => $commentaire_list,
         ]);
     }
-
-    // public function commentaire(ManagerRegistry $doctrine, Commentaire $commentaire = null, Request $requete)
-    // {
-    //     $em = $doctrine->getManager();
-
-    //     $form = $this->createForm(CommentaireType::class, $commentaire);
-
-    //     $form->handleRequest($requete);
-
-    //     $em->persist($commentaire);
-    //     $em->flush();
-
-    //     return $this->redirectToRoute('show_actualite');
-
-    //     return $this->render('acualite/.html.twig', [
-    //         'formProduit' => $form->createView(),
-    //     ]);
-    // }
 }

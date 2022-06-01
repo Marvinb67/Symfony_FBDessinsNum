@@ -52,6 +52,7 @@ class Actualite
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->poster_le = new \DateTime();
     }
 
     public function getId(): ?int

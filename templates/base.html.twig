@@ -38,7 +38,7 @@
             </ul>
             <div id="header-buttons">
                 {% if is_granted('ROLE_ADMIN') %}
-                <a href="" class="header-button">Admin</a>
+                <a href="{{ path('admin') }}" class="header-button">Admin</a>
                 {% endif %}
                 {% if app.user %}
                 <a href="" id="coup-de-coeur"><i class="fa-solid fa-heart"></i></a>

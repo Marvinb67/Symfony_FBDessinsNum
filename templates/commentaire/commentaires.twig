@@ -1,0 +1,9 @@
+{% block body %}
+<div class="commentaire">
+    {% for com in commentaire_list %}
+        <p>{{ com.contenue }}</p>
+        <small>{{ com.utilisateur }}</small>
+        <small>Poster le : {{ com.posterLe | date('d/m/Y H:i:s') }}</small>
+    {% endfor %}
+</div>
+{% endblock %}
