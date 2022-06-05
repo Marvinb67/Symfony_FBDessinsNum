@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CompteController!{% endblock %}
+
+{% block body %}
+{% for message in app.flashes('erreur') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+{% endfor %}
+<form method="POST">
+    <div>
+        <label for="mdp" class="form-label">Nouveau mot de passe</label>
+        <input type="password" class="form-control" id="mdp" name="mdp">
+    </div>
+    <div>
+        <label for="conf-mdp" class="form-label">Confirmer le mot de passe</label>
+        <input type="password" class="form-control" id="conf-mdp" name="conf-mdp">
+    </div>
+    <button type="submit" class="btn btn-primary">Modifier</button>
+</form>
+{% endblock %}

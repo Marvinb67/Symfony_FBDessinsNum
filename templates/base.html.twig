@@ -35,6 +35,7 @@
                 <li><a href="">Accueil</a></li>
                 <li><a href="{{ path('index_boutique') }}">Boutique</a></li>
                 <li><a href="{{ path('actualite') }}">Actualités</a></li>
+                <li><a href="{{ path('app_a_propos') }}">A propos</a></li>
             </ul>
             <div id="header-buttons">
                 {% if is_granted('ROLE_ADMIN') %}
@@ -43,7 +44,7 @@
                 {% if app.user %}
                 <a href="" id="coup-de-coeur"><i class="fa-solid fa-heart"></i></a>
                 <a href="" id="panier"><i class="fa-solid fa-cart-shopping"></i></a>
-                <a href="" class="header-button">Mon compte</a>
+                <a href="{{ path('mon_compte') }}" class="header-button">Mon compte</a>
                 <a href="{{ path('app_logout') }}" class="header-button">Deconnexion</a>
                 {% else %}
                 <a href="{{ path('app_register')}}" class="header-button">Inscription</a>

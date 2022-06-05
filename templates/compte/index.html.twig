@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CompteController!{% endblock %}
+
+{% block body %}
+{% for message in app.flashes('message') %}
+<div class="alert alert-success">
+    {{ message }}
+</div>
+{% endfor %}
+{% for message in app.flashes('succes') %}
+<div class="alert alert-success">
+    {{ message }}
+</div>
+{% endfor %}
+<div class="info-compte">
+    <h1>Mon compte</h1>
+    <ul>
+        <li>Nom : {{ app.user.nom }} </li>
+        <li>Prenom : {{ app.user.prenom }} </li>
+        <li>Email : {{ app.user.email }} </li>
+        <li>Téléphone : {{ app.user.telephone }} </li>
+    </ul>
+    <a href="{{ path('modifier_compte')}}" class="btn btn-primary">Modifier le profil</a>
+    <a href="{{ path('modifier_mdp') }}" class="btn btn-primary">Modifier le mot de passe</a>
+</div>
+{% endblock %}

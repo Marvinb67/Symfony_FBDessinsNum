@@ -159,3 +159,7 @@ footer p{
 .derniere-actus{
     display: flex;
 }
+
+.aPropos{
+    background-image: url('public/image/logo/aPropos.jpg')
+}

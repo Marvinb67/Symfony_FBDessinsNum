@@ -94,6 +94,11 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $adresses;
 
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $telephone;
+
     public function __construct()
     {
         $this->favoris = new ArrayCollection();
@@ -450,5 +455,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         return ''.$this->prenom.' '.$this->nom.'';
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
     }
 }

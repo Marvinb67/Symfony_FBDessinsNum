@@ -40,7 +40,7 @@ class Actualite
     private $poster_le;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="actualites")
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="actualites", )
      */
     private $utilisateur;
 
