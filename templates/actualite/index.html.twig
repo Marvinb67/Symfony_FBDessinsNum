@@ -4,13 +4,15 @@
 
 {% block body %}
 {% for actu in actualites %}
-<div class="carte">
-    <div class="carte-container">
-      <h2><a href="{{ path('show_actualite', {'id': actu.id}) }}" class="text-secondary">{{ actu }}</a></h2>
-      <p>{{ actu.contenue }}</p>
-      <small>{{ actu.utilisateur }}</small>
-      <small>Poster le : {{ actu.posterLe | date('d-m-Y H:i:s') }}</small>
+{% if actu.actif == true %}
+  <div class="carte">
+      <div class="carte-container">
+        <h2><a href="{{ path('show_actualite', {'id': actu.id}) }}" class="text-secondary">{{ actu }}</a></h2>
+        <p>{{ actu.contenue }}</p>
+        <small>{{ actu.utilisateur }}</small>
+        <small>Poster le : {{ actu.posterLe | date('d-m-Y H:i:s') }}</small>
+      </div>
     </div>
-  </div>
+  {% endif %}
 {% endfor %}
 {% endblock %}

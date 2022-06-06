@@ -6,11 +6,9 @@ use App\Entity\Produit;
 use App\Form\ProduitType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class BoutiqueController extends AbstractController
 {
@@ -68,4 +66,27 @@ class BoutiqueController extends AbstractController
     //         'formProduit' => $form->createView(),
     //     ]);
     // }
+
+    /**
+     * @Route("/boutique/favoris/{id}", name="ajout_favoris")
+     */
+    public function ajoutFavoris(ManagerRegistry $doctrine, Produit $produit): Response
+    {
+        $em = $doctrine->getManager();
+        $this->getUser()->addFavori($produit);
+
+        $em->flush();
+
+        return $this->redirectToRoute('index_boutique');
+    }
+
+    /**
+     * @Route("/boutique/{id}", name="detail_produit")
+     */
+    public function detailProduit(Produit $produit): Response
+    {
+        return $this->render('boutique/produit.html.twig', [
+            'produit' => $produit,
+        ]);
+    }
 }

@@ -39,6 +39,11 @@ class Commentaire
      */
     private $actualite;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $actif;
+
     public function __construct()
     {
         $this->poster_le = new \DateTime();
@@ -93,6 +98,18 @@ class Commentaire
     public function setActualite(?Actualite $actualite): self
     {
         $this->actualite = $actualite;
+
+        return $this;
+    }
+
+    public function isActif(): ?bool
+    {
+        return $this->actif;
+    }
+
+    public function setActif(bool $actif): self
+    {
+        $this->actif = $actif;
 
         return $this;
     }

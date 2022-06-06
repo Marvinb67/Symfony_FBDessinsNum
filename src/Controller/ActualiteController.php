@@ -38,6 +38,7 @@ class ActualiteController extends AbstractController
             $commentaire = $form->getData();
             $commentaire->setUtilisateur($this->getUser());
             $commentaire->setActualite($actualite);
+            $commentaire->setActif(true);
 
             $em->persist($commentaire);
             $em->flush();

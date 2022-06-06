@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Commentaire;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 
@@ -22,6 +23,7 @@ class CommentaireCrudController extends AbstractCrudController
             AssociationField::new('actualite'),
             TextareaField::new('contenue'),
             DateTimeField::new('posterLe'),
+            BooleanField::new('actif'),
         ];
     }
 }

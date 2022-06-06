@@ -49,6 +49,11 @@ class Actualite
      */
     private $commentaires;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $actif;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -153,5 +158,17 @@ class Actualite
     public function __toString()
     {
         return $this->titre;
+    }
+
+    public function isActif(): ?bool
+    {
+        return $this->actif;
+    }
+
+    public function setActif(bool $actif): self
+    {
+        $this->actif = $actif;
+
+        return $this;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Actualite;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -23,6 +24,7 @@ class ActualiteCrudController extends AbstractCrudController
             TextareaField::new('contenue'),
             ImageField::new('image')->setUploadDir('public/image/dessins'),
             DateTimeField::new('posterLe'),
+            BooleanField::new('actif'),
         ];
     }
 }

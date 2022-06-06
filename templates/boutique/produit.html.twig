@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ produit }}{% endblock %}
+
+{% block body %}
+<div class="info-produit">
+    <h1>{{ produit }}</h1>
+    <small>{{ produit.categorie }}</small>
+    <p>
+        {{ produit.description }}
+    </p>
+    <p>
+        Creer : le 22/07/2006
+    </p>
+    <p>Dimensions : {{ produit.dimensions }} cm</p>
+    <p>{{ produit.prix }} €</p>
+    <a href="" class="btn btn-primary">Ajouter au panier</a>
+</div>
+<div class="produit-img">
+    <img src="image/dessins/{{ produit.image }}" class="card-img-top" alt="{{ produit.nom }}">
+</div>
+{% endblock %}

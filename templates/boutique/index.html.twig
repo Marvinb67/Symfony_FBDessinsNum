@@ -11,7 +11,7 @@
     <div class="card">
         <img src="image/dessins/{{ real.image }}" class="card-img-top" alt="{{ real.nom }}">
         <div class="card-body">
-          <h5 class="card-title">{{ real.nom }}</h5>
+          <h5 class="card-title"><a href="{{ path('detail_produit', {'id': real.id}) }}" class="text-dark">{{ real.nom }}</a> <span><a href="{{ path('ajout_favoris', {'id': real.id}) }}"><i class="fa-solid fa-heart bg-secondary text-light favoris"></i></a></span></h5>
           <p class="card-text">{{ real.description }}</p>
           <p class="card-text">{{ real.dimensions }}</p>
           <p class="card-text">{{ real.prix }} €</p>

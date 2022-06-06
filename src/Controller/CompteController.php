@@ -33,7 +33,6 @@ class CompteController extends AbstractController
         $form->handleRequest($requete);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $nouvMdp = $form->get('nouvMdp')->getData();
             $em = $doctrine->getManager();
             $em->flush();
 
