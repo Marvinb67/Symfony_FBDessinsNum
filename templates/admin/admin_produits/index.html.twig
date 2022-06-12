@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminproduitController!{% endblock %}
+
+{% block body %}
+<h1>Gérer les produits</h1>
+<h2>Il y a actuellement {{ produits | length() }} produits</h2>
+<a href="{{ path('admin_produits_ajout') }}" class="btn btn-success">Ajouter</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Images</th>
+            <th>Nom</th>
+            <th>Categorie</th>
+            <th>Description</th>
+            <th>Dimensions</th>
+            <th>Prix</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        {% for produit in produits %}
+            <tr>                
+                <td>{{ produit.image }}</td> 
+                <td>{{ produit.nom }}</td>
+                <td>{{ produit.categorie }}</td>
+                <td>{{ produit.description }}</td>
+                <td>{{ produit.dimensions }}</td>
+                <td>{{ produit.prix }} €</td>
+                <td><a href="{{ path('admin_produits_modifier', {'id': produit.id}) }}"><i class="fa-solid fa-pen-to-square text-warning"></i></a> <a href="{{ path('admin_produits_supprimer', {'id': produit.id}) }}"><i class="fa-solid fa-trash-can text-danger"></i></a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

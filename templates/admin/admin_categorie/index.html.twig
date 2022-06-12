@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminCategorieController!{% endblock %}
+
+{% block body %}
+<h1>Gérer les categories</h1>
+<h2>Il y a actuellement {{ categories | length() }} catégories</h2>
+<a href="{{ path('admin_categorie_ajout') }}">Ajouter</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        {% for categorie in categories %}
+            <tr>                
+                <td>{{ categorie.id }}</td> 
+                <td>{{ categorie.nom }}</td>
+                <td><a href="{{ path('admin_categorie_modifier', {'id': categorie.id}) }}"><i class="fa-solid fa-pen-to-square text-warning"></i></a> <a href="{{ path('admin_categorie_supprimer', {'id': categorie.id}) }}"><i class="fa-solid fa-trash-can text-danger"></i></a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

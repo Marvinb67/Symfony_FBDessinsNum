@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminCategorieController!{% endblock %}
+
+{% block body %}
+<h1>Gérer les categories</h1>
+<h2>Il y a actuellement {{ utilisateurs | length() }} utilisateurs inscrit sur le site</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
+            <th>Date d'inscription</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        {% for utilisateur in utilisateurs %}
+            <tr>                
+                <td>{{ utilisateur.nom }}</td> 
+                <td>{{ utilisateur.prenom }}</td>
+                <td>{{ utilisateur.email }}</td>
+                <td>{{ utilisateur.creerLe | date('d/m/Y') }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

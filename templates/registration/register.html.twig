@@ -18,8 +18,8 @@
             <div>
                 {{ form_widget(registrationForm.plainPassword) }}
             </div>
-            <div>
-                {{ form_widget(registrationForm.agreeTerms) }}
+            <div id="agreeTerms">
+                {{ form_row(registrationForm.agreeTerms) }}
             </div>
                 <button type="submit" class="btn-register">Inscription</button>
             {{ form_end(registrationForm) }}

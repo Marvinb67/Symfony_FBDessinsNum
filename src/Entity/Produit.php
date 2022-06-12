@@ -226,6 +226,6 @@ class Produit
 
     public function dimensions()
     {
-        return ''.$this->largeur.' X '.$this->hauteur.'';
+        return ''.$this->largeur.' X '.$this->hauteur.' cm';
     }
 }

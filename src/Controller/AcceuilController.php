@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Actualite;
+use App\Entity\Produit;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +15,10 @@ class AcceuilController extends AbstractController
      */
     public function index(ManagerRegistry $doctrine): Response
     {
-        $actualites = $doctrine->getRepository(Actualite::class)->findBy([], ['poster_le' => 'DESC']);
+        $produits = $doctrine->getRepository(Produit::class)->findBy([], ['nom' => 'DESC']);
 
         return $this->render('acceuil/index.html.twig', [
-            'actualites' => $actualites,
+            'produits' => $produits,
         ]);
     }
 }

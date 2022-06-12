@@ -11,6 +11,7 @@ body{
 #wrapper{
     max-width: 1090px;
     margin: auto;
+   
 }
 
 main{
@@ -24,7 +25,6 @@ header{
 
 a{
     text-decoration: none;
-    color: white;
 }
 
 ul{
@@ -35,6 +35,10 @@ header nav{
     display: flex;
     align-items: center;
     justify-content: space-around;
+}
+
+header a{
+    color: white;
 }
 
 .logo img{
@@ -71,6 +75,10 @@ header nav ul li{
     width: 100%;
     margin: 1em 0;
     padding: 1.5em;
+}
+
+#agreeTerms{
+    text-align: center;
 }
 
 .btn-register{
@@ -127,32 +135,37 @@ footer ul li{
 footer p{
     text-align: center;
     font-size: 10px;
-} */
+}
+
+footer a{
+    color: white;
+}
 
 #hero img{
     width: 100%;
 }
 
-.card-group{
+/* .card-group{
     margin: 1em;
-}
+} */
 
-.card-img-top{
+.carte-img{
     width: 100%;
     height: 15vw;
     object-fit: cover;
 }
 
-.card{
+/* .card{
     width: 33%;
     margin: 1em;
-}
+} */
 
 .carte{
     /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    width: 33%;
+    width: 30%;
+    margin: 0 1em;
   }
   
   /* On mouse-over, add a deeper shadow */
@@ -176,4 +189,25 @@ footer p{
 
 .aPropos{
     background-image: url('public/image/logo/aPropos.jpg')
+}
+
+.produit-container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.sidebar {
+    margin: 0;
+    padding: 1.5em 1em;
+    width: 200px;
+    background-color: #f1f1f1;
+    height: 100%;
+    overflow: auto;
+}
+
+.sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
 }
