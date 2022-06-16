@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminCategorieController!{% endblock %}
+
+{% block body %}
+<h1>Gérer les commentaires</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Dimensions</th>
+            <th>Prix</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        {% for favori in favoris %}
+            <tr>                
+                <td>{{favori.nom }}</td> 
+                <td>{{favori.Description }}</td>
+                <td>{{favori.dimensions }}</td>
+                <td>{{favori.prix }}</td>
+                <td><a href="{{ path('retirer_favoris', {'id': favori.id}) }}">Retirer des favoris</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

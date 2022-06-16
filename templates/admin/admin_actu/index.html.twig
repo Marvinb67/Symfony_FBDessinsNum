@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminactualiteController!{% endblock %}
+
+{% block body %}
+<h1>Gérer les categories</h1>
+<h2>Il y a actuellement {{ actualites | length() }} actualités</h2>
+<a href="{{ path('ajout_actu') }}">Ajouter</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Image</th>
+            <th>Contenue</th>
+            <th>Poster par</th>
+            <th>Actif</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        {% for actualite in actualites %}
+            <tr>                
+                <td>{{ actualite.titre }}</td>
+                {% if actualite.image %}
+                    <td>{{ actualite.image }}</td>
+                {% else %}
+                    <td>Aucune image</td>
+                {% endif %}
+                <td>{{ actualite.contenue }}</td>
+                <td>{{ actualite.utilisateur }}</td>
+                <td>
+                    <div class="form-check form-switch form-check-reverse">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse">
+                    </div>
+                </td>
+                <td><a href="{{ path('modif_actu', {'id': actualite.id}) }}"><i class="fa-solid fa-pen-to-square text-warning"></i></a> <a href="{{ path('supprimer_actu', {'id': actualite.id}) }}"><i class="fa-solid fa-trash-can text-danger"></i></a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

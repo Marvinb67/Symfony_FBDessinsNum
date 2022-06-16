@@ -21,6 +21,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ produit }}</h5>
                 <p class="card-text">{{ produit.description }}</p>
+                <p class="card-text"><small class="text-muted">{{ produit.dimensions }}</small></p>
                 <p class="card-text"><small class="text-muted">{{ produit.prix }} €</small></p>
                 <a href="{{ path('ajout_panier', {'id': produit.id}) }}" class="btn btn-primary">Ajouter au panier</a>
             </div>

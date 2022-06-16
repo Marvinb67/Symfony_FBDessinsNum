@@ -56,7 +56,7 @@ class AdminCategorieController extends AbstractController
     /**
      * @Route("/admin/categorie/supprimer/{id}", name="admin_categorie_supprimer")
      */
-    public function supprimer(ManagerRegistry $doctrine, Categorie $categorie)
+    public function supprimer(ManagerRegistry $doctrine, Categorie $categorie): Response
     {
         $em = $doctrine->getManager();
 

@@ -228,4 +228,16 @@ class Produit
     {
         return ''.$this->largeur.' X '.$this->hauteur.' cm';
     }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(int $stock): self
+    {
+        $this->stock = $stock;
+
+        return $this;
+    }
 }

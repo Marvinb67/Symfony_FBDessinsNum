@@ -1,11 +1,10 @@
 {% block body %}
 <div class="commentaire">
     {% for com in commentaire_list %}
-        {% if com.actif == true %}
-            <p>{{ com.contenue }}</p>
-            <small>{{ com.utilisateur }}</small>
-            <small>Poster le : {{ com.posterLe | date('d/m/Y H:i:s') }}</small>
-        {% endif %}
+    {% if com.actif == true %}
+    <small>{{ com.utilisateur }} <small>Poster le : {{ com.posterLe | date('d/m/Y H:i:s') }}</small></small>
+    <p>{{ com.contenue }}</p>
+    {% endif %}
     {% endfor %}
 </div>
 {% endblock %}

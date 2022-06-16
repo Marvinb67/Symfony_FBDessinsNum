@@ -53,6 +53,11 @@ class RegistrationFormType extends AbstractType
                         'placeholder' => 'Confirmation mot de passe',
                 ], ],
                 ])
+            ->add('telephone', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Numéro de téléphone',
+                ],
+            ])
 
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,

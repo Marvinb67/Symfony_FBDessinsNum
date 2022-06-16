@@ -9,6 +9,7 @@
     <thead>
         <tr>
             <th>Action</th>
+            <th>image</th>
             <th>Nom</th>
             <th>Prix</th>
             <th>Quantité</th>
@@ -19,6 +20,7 @@
        {% for item in dataPanier %}
         <tr>
             <td><a href="{{ path('supprimer_panier', {'id': item.produit.id}) }}" class="text-danger">Supprimer</a></td>
+            <td><img src="../../public/image/dessins/{{item.produit.image}}" alt="{{item.produit}}"></td>
             <td><a href="{{ path('detail_produit', {'id': item.produit.id}) }}">{{ item.produit }}</a></td>
             <td>{{ item.produit.prix }} €</td>
             <td><a href="{{ path('retirer_panier', {'id': item.produit.id}) }}" class="text-danger">-</a> {{ item.qtt }} <a href="{{ path('ajout_panier', {'id': item.produit.id}) }}" class="text-success">+</a></td>
@@ -37,6 +39,7 @@
         </tr>
     </tfoot>
 </table>
-<p><a href="{{ path('vider') }}">Vider le panier</a></p>
+<p><a href="{{ path('vider') }}">Vider le panier</a> <button class="btn btn-success float-end">Confirmer la commande</button></p>
+
 {{ dump() }}
 {% endblock %}

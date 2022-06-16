@@ -15,76 +15,83 @@
     {% endblock %}
 
     {% block javascripts %}
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+        crossorigin="anonymous"></script>
     <script src="{{ asset('css/styles.css') }}"></script>
     {% endblock %}
 </head>
 
 <body>
-    <header>
-        {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
+    <div id="big-wrap">
+        <header>
+            {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+            {% endfor %}
+            <nav>
+                <div class="logo">
+                    <a href="{{ path('acceuil') }}">
+                        <img src="{{ asset('image/logo/logo_white_fbdn.png') }}" alt="Logo FBDN">
+                    </a>
+                </div>
+                <ul>
+                    <li><a href="{{ path('index_boutique') }}">Boutique</a></li>
+                    <li><a href="{{ path('actualite') }}">Actualités</a></li>
+                    <li><a href="{{ path('app_a_propos') }}">A propos</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('admin') }}">Admin</a></li>
+                    {% endif %}
+                </ul>
+                <div id="header-buttons">
+                    {% if app.user %}
+                    <a href="{{ path('favoris') }}" id="coup-de-coeur"><i class="fa-solid fa-heart"></i></a>
+                    <a href="{{ path('panier') }}" id="panier"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <a href="{{ path('mon_compte') }}" class="header-button">Mon compte</a>
+                    <a href="{{ path('app_logout') }}" class="header-button">Deconnexion</a>
+                    {% else %}
+                    <a href="{{ path('app_register')}}" class="header-button">Inscription</a>
+                    <a href="{{ path('app_login')}}" class="header-button">Connexion</a>
+                    {% endif %}
+                </div>
+            </nav>
+        </header>
+        <div id="wrapper">
+            <main>
+                {% block body %}{% endblock %}
+            </main>
         </div>
-        {% endfor %}
-        <nav>
-            <div class="logo">
-                <a href="{{ path('acceuil') }}">
-                    <img src="{{ asset('image/logo/logo_white_fbdn.png') }}" alt="Logo FBDN">
-                </a>
+        <footer>
+            <div class="footer-image">
+                <a href="{{ path('acceuil') }}"><img src="{{ asset('image/logo/logo_white_fbdn.png') }}" alt="logo"
+                        class="footer-img"></a>
+                <p>&copy; FBDessinNumerique, All rights reserved</p>
             </div>
-            <ul>
-                <li><a href="{{ path('index_boutique') }}">Boutique</a></li>
-                <li><a href="{{ path('actualite') }}">Actualités</a></li>
-                <li><a href="{{ path('app_a_propos') }}">A propos</a></li>
-                {% if is_granted('ROLE_ADMIN') %}
-                <li><a href="{{ path('admin') }}">Admin</a></li>
-                {% endif %}
-            </ul>
-            <div id="header-buttons">
-                {% if app.user %}
-                <a href="" id="coup-de-coeur"><i class="fa-solid fa-heart"></i></a>
-                <a href="" id="panier"><i class="fa-solid fa-cart-shopping"></i></a>
-                <a href="{{ path('mon_compte') }}" class="header-button">Mon compte</a>
-                <a href="{{ path('app_logout') }}" class="header-button">Deconnexion</a>
-                {% else %}
-                <a href="{{ path('app_register')}}" class="header-button">Inscription</a>
-                <a href="{{ path('app_login')}}" class="header-button">Connexion</a>
-                {% endif %}
+            <div class="services">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="{{ path('index_boutique') }}">Boutique</a></li>
+                    <li><a href="{{ path('actualite') }}">Actualités</a></li>
+                    <li><a href="{{ path('app_a_propos') }}">A propos</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Vie privé et sécurité</a></li>
+                    <li><a href="#">Mentions légale</a></li>
+                </ul>
             </div>
-        </nav>
-    </header>
-    <div id="wrapper">
-        <main>
-            {% block body %}{% endblock %}
-        </main>
+            <div id="social">
+                <h3>Réseaux Sociaux</h3>
+                <ul>
+                    <li><a href=""><i class="fa-brands fa-facebook-f"></i></a></li>
+                    <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href=""><i class="fa-brands fa-linkedin-in"></i></a></li>
+                </ul>
+            </div>
+        </footer>
     </div>
-    <footer>
-        <div class="footer-image">
-            <a href="{{ path('acceuil') }}"><img src="{{ asset('image/logo/logo_white_fbdn.png') }}" alt="logo"class="footer-img"></a>
-            <p>&copy; FBDessinNumerique, All rights reserved</p>
-        </div>
-        <div class="services">
-            <h3>Services</h3>
-            <ul>
-                <li><a href="{{ path('index_boutique') }}">Boutique</a></li>
-                <li><a href="{{ path('actualite') }}">Actualités</a></li>
-                <li><a href="{{ path('app_a_propos') }}">A propos</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Vie privé et sécurité</a></li>
-                <li><a href="#">Mentions légale</a></li>
-            </ul>
-        </div>
-        <div id="social">
-            <h3>Réseaux Sociaux</h3>
-            <ul>
-                <li><a href=""><i class="fa-brands fa-facebook-f"></i></a></li>
-                <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
-                <li><a href=""><i class="fa-brands fa-linkedin-in"></i></a></li>
-            </ul>
-        </div>
-    </footer>
 </body>
 
 </html>

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminCategorieController!{% endblock %}
+
+{% block body %}
+<h1>Gérer les commentaires</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Utilisateur</th>
+            <th>Actualité</th>
+            <th>Contenue</th>
+            <th>Poster le</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        {% for commentaire in commentaires %}
+            <tr>                
+                <td>{{ commentaire.utilisateur }}</td> 
+                <td>{{ commentaire.actualite }}</td>
+                <td>{{ commentaire.contenue }}</td>
+                <td>{{ commentaire.posterLe | date('d/m/Y H:i:s') }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

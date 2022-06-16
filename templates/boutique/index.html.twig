@@ -3,7 +3,6 @@
 {% block title %}Hello BoutiqueController!{% endblock %}
 
 {% block body %}
-
 <h1>Réalisations</h1>
 <div class="row">
   {% for real in produits %}
@@ -14,7 +13,7 @@
               <a href="{{ path('detail_produit', {'id': real.id})}}"><h2 class="card-title">{{ real }}</h2></a>
               <p class="card-text">{{ real.description }}</p>
               <p class="small">{{ real.dimensions }} <span class="small">{{ real.prix }} €</span></p>
-              <a href="{{ path('ajout_panier', {'id': real.id}) }}" class="btn btn-primary w-5">Ajouter au panier</a>
+              <p><a href="{{ path('ajout_panier', {'id': real.id}) }}" class="btn btn-primary w-5">Ajouter au panier</a> <a href="{{ path('ajout_favoris', {'id': real.id}) }}"><i class="fa-solid fa-heart"></i></a></p>
           </div>
       </div>
   </div>

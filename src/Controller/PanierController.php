@@ -3,9 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
-use App\Repository\ProduitRepository;
+use App\Services\Panier\PanierService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,50 +13,22 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier", name="panier")
      */
-    public function index(ProduitRepository $produitRepo, SessionInterface $session): Response
+    public function index(PanierService $panierService)
     {
-        // On recupere les elements de la session
-        $panier = $session->get('panier', []);
-
-        // On recupere les données du produit dans le panier
-        $datapanier = [];
-        $total = 0;
-
-        foreach ($panier as $id => $qtt) {
-            $produit = $produitRepo->find($id);
-            $datapanier[] = [
-                'produit' => $produit,
-                'qtt' => $qtt,
-            ];
-            $total = $produit->getPrix() * $qtt;
-        }
-
         return $this->render('panier/index.html.twig', [
-            'dataPanier' => $datapanier,
-            'total' => $total,
+            'dataPanier' => $panierService->getPanierPlein(),
+            'total' => $panierService->getTotal(),
         ]);
     }
 
     /**
      * @Route("/panier/ajout/{id}", name="ajout_panier")
      */
-    public function add(Produit $produit, SessionInterface $session)
+    public function add(Produit $produit, PanierService $panierService)
     {
-        // On recupere le panier actuel
-        $panier = $session->get('panier', []);
-        $id = $produit->getId();
+        $panierService->ajouter($produit->getId());
 
-        // On verifie si le produit est deja dans le panier
-        if (!empty($panier[$id])) {
-            // Si oui on l'incremente.
-            ++$panier[$id];
-        } else {
-            // Sinon on le crée avec 1 comme valeur par défaut
-            $panier[$id] = 1;
-        }
-
-        // On sauvegarde dans la session
-        $session->set('panier', $panier);
+        $this->addFlash('success', 'Produit ajouté avec succès');
 
         return $this->redirectToRoute('panier');
     }
@@ -65,27 +36,9 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier/retirer/{id}", name="retirer_panier")
      */
-    public function retirer(Produit $produit, SessionInterface $session)
+    public function retirer(Produit $produit, PanierService $panierService)
     {
-        // On recupere le panier actuel
-        $panier = $session->get('panier', []);
-        $id = $produit->getId();
-
-        // On verifie si le produit est deja dans le panier
-        if (!empty($panier[$id])) {
-            // Si la qtt du produit est supp a 1
-            if ($panier[$id] > 1) {
-                // On decremente.
-                --$panier[$id];
-            } else {
-                // Sinon on le supprime entierement
-
-                unset($panier[$id]);
-            }
-        }
-
-        // On sauvegarde dans la session
-        $session->set('panier', $panier);
+        $panierService->retirer($produit->getId());
 
         return $this->redirectToRoute('panier');
     }

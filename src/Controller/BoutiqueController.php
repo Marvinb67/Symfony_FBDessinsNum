@@ -23,19 +23,6 @@ class BoutiqueController extends AbstractController
     }
 
     /**
-     * @Route("/boutique/favoris/{id}", name="ajout_favoris")
-     */
-    public function ajoutFavoris(ManagerRegistry $doctrine, Produit $produit): Response
-    {
-        $em = $doctrine->getManager();
-        $this->getUser()->addFavori($produit);
-
-        $em->flush();
-
-        return $this->redirectToRoute('index_boutique');
-    }
-
-    /**
      * @Route("/boutique/{id}", name="detail_produit")
      */
     public function detailProduit(Produit $produit): Response

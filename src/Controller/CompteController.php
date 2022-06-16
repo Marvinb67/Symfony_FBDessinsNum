@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\ModifMdpType;
 use App\Form\ModifProfilType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -51,22 +52,45 @@ class CompteController extends AbstractController
      */
     public function modifierMdp(Request $requete, ManagerRegistry $doctrine, UserPasswordHasherInterface $hasher)
     {
-        if ($requete->isMethod('POST')) {
-            $em = $doctrine->getManager();
-            $user = $this->getUser();
-            dump($requete->request->get('mdp'));
-            // On vérifie que les mots de passe sont identique
-            if ($requete->request->get('mdp') == $requete->request->get('conf-mdp')) {
-                $user->setPassword($hasher->hashPassword($user, $requete->request->get('mdp')));
-                $em->flush();
+        $user = $this->getUser();
+        $form = $this->createForm(ModifMdpType::class);
+
+        $form->handleRequest($requete);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $password = $form->get('password')->getData();
+            $nouvMdp = $form->get('nouveauMdp')->getData();
+
+            if (password_verify($password, $user->getPassword())) {
+                $user->setPassword($hasher->hashPassword($user, $nouvMdp));
+                $doctrine->getManager()->flush();
+
                 $this->addFlash('succes', 'Mot de passe modifier');
 
                 return $this->redirectToRoute('mon_compte');
-            } else {
-                $this->addFlash('erreur', 'Impossible de modifier le mot de passe');
             }
         }
 
-        return $this->render('compte/modifMdp.html.twig');
+        return $this->render('compte/modifMdp.html.twig', [
+            'formModifMdp' => $form->createView(),
+        ]);
     }
 }
+
+// if ($requete->isMethod('POST')) {
+//     $em = $doctrine->getManager();
+//     $user = $this->getUser();
+//     dump($requete->request->get('mdp'));
+//     // On vérifie que les mots de passe sont identique
+//     if ($requete->request->get('mdp') == $requete->request->get('conf-mdp')) {
+//         $user->setPassword($hasher->hashPassword($user, $requete->request->get('mdp')));
+//         $em->flush();
+//         $this->addFlash('succes', 'Mot de passe modifier');
+
+//         return $this->redirectToRoute('mon_compte');
+//     } else {
+//         $this->addFlash('erreur', 'Impossible de modifier le mot de passe');
+//     }
+// }
+
+// return $this->render('compte/modifMdp.html.twig');
