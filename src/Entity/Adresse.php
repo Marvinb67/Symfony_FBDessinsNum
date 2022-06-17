@@ -106,4 +106,9 @@ class Adresse
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->adresse;
+    }
 }

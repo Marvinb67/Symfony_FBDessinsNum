@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CommandeRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +37,11 @@ class Commande
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="commandes")
      */
     private $utilisateur;
+
+    public function __construct()
+    {
+        $this->date_commande = new \DateTime();
+    }
 
     public function getId(): ?int
     {

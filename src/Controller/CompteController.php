@@ -58,10 +58,10 @@ class CompteController extends AbstractController
         $form->handleRequest($requete);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $form->get('password')->getData();
+            $ancienMdp = $form->get('password')->getData();
             $nouvMdp = $form->get('nouveauMdp')->getData();
 
-            if (password_verify($password, $user->getPassword())) {
+            if (password_verify($ancienMdp, $user->getPassword())) {
                 $user->setPassword($hasher->hashPassword($user, $nouvMdp));
                 $doctrine->getManager()->flush();
 

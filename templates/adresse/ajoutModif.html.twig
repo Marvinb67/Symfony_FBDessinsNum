@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminCategorieController!{% endblock %}
+
+{% block body %}
+{% for message in app.flashes('erreur') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+{% endfor %}
+<h1>Ajouter un produit</h1>
+{{ form(formAdresse) }}
+{% endblock %}
