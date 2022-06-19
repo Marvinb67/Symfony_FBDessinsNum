@@ -20,6 +20,9 @@
         <li>Prenom : {{ app.user.prenom }} </li>
         <li>Email : {{ app.user.email }} </li>
         <li>Téléphone : {{ app.user.telephone }} </li>
+        {% for adresse in app.user.adresses %}
+            <li>Adresse : {{ adresse }} </li>
+        {% endfor %}
     </ul>
     <a href="{{ path('modifier_compte')}}" class="btn btn-primary">Modifier le profil</a>
     <a href="{{ path('modifier_mdp') }}" class="btn btn-primary">Modifier le mot de passe</a>

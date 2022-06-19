@@ -220,3 +220,14 @@ footer a{
     padding: 16px;
     text-decoration: none;
 }
+
+.adresses, .panier{
+    border:2px solid #e91e63;
+    border-radius: 10px;
+    width: 300px;
+    padding: 1em;
+}
+
+.adresses{
+    margin: 1em 0;
+}

@@ -22,6 +22,7 @@
                 <td>{{favori.Description }}</td>
                 <td>{{favori.dimensions }}</td>
                 <td>{{favori.prix }}</td>
+                <td><a href="{{ path('ajout_panier', {'id': favori.id}) }}">Ajouter au panier</a></td>
                 <td><a href="{{ path('retirer_favoris', {'id': favori.id}) }}">Retirer des favoris</a></td>
             </tr>
         {% endfor %}

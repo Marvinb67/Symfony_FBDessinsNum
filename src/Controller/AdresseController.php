@@ -6,10 +6,10 @@ use App\Entity\Adresse;
 use App\Form\AdresseType;
 use App\Repository\AdresseRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdresseController extends AbstractController
 {
@@ -38,14 +38,14 @@ class AdresseController extends AbstractController
 
         $form->handleRequest($requete);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $adresse = $form->getData();
             $adresse->setUtilisateur($this->getUser());
 
             $em->persist($adresse);
             $em->flush();
 
-            return $this->redirectToRoute('adresse');
+            return $this->redirectToRoute('commande');
         }
 
         return $this->render('adresse/ajoutModif.html.twig', [

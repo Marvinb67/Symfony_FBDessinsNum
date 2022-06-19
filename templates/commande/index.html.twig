@@ -4,37 +4,24 @@
 
 {% block body %}
 <div class="adresses">
-    <p>Mes adresses <p>
-    {% for adresse in app.user.adresses %}
-        <p>Adresse : {{ adresse }}</p>
-        <p>Code Postale : {{ adresse.cp }}</p>
-        <p>Vile : {{ adresse.ville }}</p>
-        <p>Pays : {{ adresse.pays }}</p>
-    {% endfor %}
+    <h2>Mes adresses</h2>
+    {{ form_start(formConfirm, {action: path('validation_commande')}) }}
+        <div>
+            {{ form_widget(formConfirm.adresse) | replace({'[esc]' : '<br>'}) | raw }}
+        </div>
+    {{ form_end(formConfirm) }}
+    <a href="{{ path('ajouter_adresse') }}" class="btn btn-success">Ajouter une adresse</a>
 </div>
 
 <div class="panier">
-    <p class="text-center">Votre commande</p>
-    <table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Produits</th>
-            <th>Prix</th>
-            <th>Quantité</th>
-        </tr>
-    </thead>
-    <tbody>
-        
-        {{dump(panier)}}
-        {% for item in panier %}
-            <tr>                
-                <td>{{ item.produit }}</td> 
-                <td>{{ item.produit.prix}} €</td>
-                <td>{{ item.qtt}}</td>
-                <td><a href=""><i class="fa-solid fa-trash-can text-danger"></i></a></td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <h2>Ma commande</h2>
+    {% for item in panier %}
+        <p>Produit : {{ item.produit }}</p>
+        <p>Quantité : {{ item.qtt}}</p>
+        <p>Prix unitaire : {{ item.produit.prix}} €</p>
+    {% endfor %}
+    <p>Total de la commande: {{ total }} €</p>
+    <a href=""><i class="fa-solid fa-trash-can text-danger"></i></a>
+    <a href="" class="btn btn-success text-center">Finaliser la commande</a>
 </div>
 {% endblock %}

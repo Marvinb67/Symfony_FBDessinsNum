@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\CommandeRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,9 +40,24 @@ class Commande
      */
     private $utilisateur;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Panier::class, mappedBy="commande")
+     */
+    private $paniers;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     */
+    private $adresseLivraison;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nomComplet;
+
     public function __construct()
     {
-        $this->date_commande = new \DateTime();
+        $this->paniers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -92,6 +109,68 @@ class Commande
     public function setUtilisateur(?Utilisateur $utilisateur): self
     {
         $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    public function genererNum()
+    {
+        $jour = date('Ymd');
+        $time = time();
+
+        return $jour.$time;
+    }
+
+    /**
+     * @return Collection<int, Panier>
+     */
+    public function getPaniers(): Collection
+    {
+        return $this->paniers;
+    }
+
+    public function addPanier(Panier $panier): self
+    {
+        if (!$this->paniers->contains($panier)) {
+            $this->paniers[] = $panier;
+            $panier->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removePanier(Panier $panier): self
+    {
+        if ($this->paniers->removeElement($panier)) {
+            // set the owning side to null (unless already changed)
+            if ($panier->getCommande() === $this) {
+                $panier->setCommande(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAdresseLivraison(): ?string
+    {
+        return $this->adresseLivraison;
+    }
+
+    public function setAdresseLivraison(string $adresseLivraison): self
+    {
+        $this->adresseLivraison = $adresseLivraison;
+
+        return $this;
+    }
+
+    public function getNomComplet(): ?string
+    {
+        return $this->nomComplet;
+    }
+
+    public function setNomComplet(string $nomComplet): self
+    {
+        $this->nomComplet = $nomComplet;
 
         return $this;
     }
