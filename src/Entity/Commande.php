@@ -46,14 +46,14 @@ class Commande
     private $paniers;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable = true)
-     */
-    private $adresseLivraison;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $nomComplet;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="commandes")
+     */
+    private $adresseLivraison;
 
     public function __construct()
     {
@@ -151,18 +151,6 @@ class Commande
         return $this;
     }
 
-    public function getAdresseLivraison(): ?string
-    {
-        return $this->adresseLivraison;
-    }
-
-    public function setAdresseLivraison(string $adresseLivraison): self
-    {
-        $this->adresseLivraison = $adresseLivraison;
-
-        return $this;
-    }
-
     public function getNomComplet(): ?string
     {
         return $this->nomComplet;
@@ -171,6 +159,18 @@ class Commande
     public function setNomComplet(string $nomComplet): self
     {
         $this->nomComplet = $nomComplet;
+
+        return $this;
+    }
+
+    public function getAdresseLivraison(): ?Adresse
+    {
+        return $this->adresseLivraison;
+    }
+
+    public function setAdresseLivraison(?Adresse $adresseLivraison): self
+    {
+        $this->adresseLivraison = $adresseLivraison;
 
         return $this;
     }

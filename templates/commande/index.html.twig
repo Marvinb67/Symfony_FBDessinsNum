@@ -5,11 +5,11 @@
 {% block body %}
 <div class="adresses">
     <h2>Mes adresses</h2>
-    {{ form_start(formConfirm, {action: path('validation_commande')}) }}
+    {{ form_start(formCommande) }}
         <div>
-            {{ form_widget(formConfirm.adresse) | replace({'[esc]' : '<br>'}) | raw }}
+            {{ form_widget(formCommande.adresseLivraison) }}
         </div>
-    {{ form_end(formConfirm) }}
+    {{ form_end(formCommande) }}
     <a href="{{ path('ajouter_adresse') }}" class="btn btn-success">Ajouter une adresse</a>
 </div>
 
@@ -21,7 +21,6 @@
         <p>Prix unitaire : {{ item.produit.prix}} €</p>
     {% endfor %}
     <p>Total de la commande: {{ total }} €</p>
-    <a href=""><i class="fa-solid fa-trash-can text-danger"></i></a>
-    <a href="" class="btn btn-success text-center">Finaliser la commande</a>
+    <a href="{{ path('validation_commande') }}" class="btn btn-success text-center">Finaliser la commande</a>
 </div>
 {% endblock %}
