@@ -3,24 +3,18 @@
 {% block title %}Hello CommandeController!{% endblock %}
 
 {% block body %}
-<div class="adresses">
-    <h2>Mes adresses</h2>
-    {{ form_start(formCommande) }}
-        <div>
-            {{ form_widget(formCommande.adresseLivraison) }}
-        </div>
-    {{ form_end(formCommande) }}
-    <a href="{{ path('ajouter_adresse') }}" class="btn btn-success">Ajouter une adresse</a>
-</div>
+<h1 class="text-center">Mes commandes</h1>
 
-<div class="panier">
-    <h2>Ma commande</h2>
-    {% for item in panier %}
-        <p>Produit : {{ item.produit }}</p>
-        <p>Quantité : {{ item.qtt}}</p>
-        <p>Prix unitaire : {{ item.produit.prix}} €</p>
-    {% endfor %}
-    <p>Total de la commande: {{ total }} €</p>
-    <a href="{{ path('validation_commande') }}" class="btn btn-success text-center">Finaliser la commande</a>
+{% for commande in commandes %}
+<div class="commande">
+    <ul>
+        <li>Numéro de commande : {{ commande.numero }}</li>
+        <li>Date de commande : {{ commande.dateCommande | date('d/m/Y H:i:s') }}</li>
+        <li>Adresse de livraison : {{ commande.adresseLivraison }}</li>
+        {% for item in commande.paniers %}
+            <li>Produits : {{item.produit}} {{item.quantite}}</li>
+        {% endfor %}
+    </ul>
 </div>
+{% endfor %}
 {% endblock %}

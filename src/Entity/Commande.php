@@ -58,6 +58,8 @@ class Commande
     public function __construct()
     {
         $this->paniers = new ArrayCollection();
+        $this->numero = $this->genererNum();
+        $this->date_commande = new \DateTime();
     }
 
     public function getId(): ?int
@@ -173,5 +175,9 @@ class Commande
         $this->adresseLivraison = $adresseLivraison;
 
         return $this;
+    }
+
+    public function afficherProduit()
+    {
     }
 }

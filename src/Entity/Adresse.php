@@ -121,7 +121,7 @@ class Adresse
 
     public function __toString()
     {
-        return $this->adresse;
+        return $this->adresse.' - '.$this->ville.' - '.$this->cp;
     }
 
     /**

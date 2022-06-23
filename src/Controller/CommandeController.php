@@ -2,16 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
 use App\Entity\Panier;
 use App\Entity\Produit;
-use App\Entity\Commande;
 use App\Form\CommandeType;
 use App\Services\Panier\PanierService;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CommandeController extends AbstractController
 {
@@ -25,77 +25,53 @@ class CommandeController extends AbstractController
     /**
      * @Route("/commande", name="commande")
      */
-    public function index(ManagerRegistry $doctrine, Request $requete): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
-        $panier = $this->panierServices->getPanierPlein();
-        $total = $this->panierServices->getTotal();
-
-        if (!$this->getUser()->getAdresses()->getValues()) {
-            $this->addFlash('erreur', 'Veuillez renseigner une adresse pour passer à la commande');
-
-            return $this->redirectToRoute('ajouter_adresse');
-        }
-
-        $form = $this->createForm(CommandeType::class);
-        $form->handleRequest($requete);
+        $commandes = $doctrine->getRepository(Commande::class)->findAll();
 
         return $this->render('commande/index.html.twig', [
-            'panier' => $panier,
-            'total' => $total,
-            'formCommande' => $form->createView(),
+            'commandes' => $commandes,
         ]);
     }
 
     /**
      * @Route("/commande/validation", name="validation_commande")
      */
-    public function ajouter(Request $requete, ManagerRegistry $doctrine, PanierService $panierService)
+    public function validationCommande(ManagerRegistry $doctrine, Request $requete): Response
     {
         $em = $doctrine->getManager();
         $session = $requete->getSession();
-
-        if (!$session->has('panier')) {
-            return $this->redirectToRoute('index_boutique');
-        }
-        $commande = new Commande();
-
         $panier = $session->get('panier');
-        // $produits = $em->getRepository(Produit::class)->findBy(array_keys($panier));
-        foreach (array_keys($session->get('panier')) as $prod) {
-            $produits[] = $em->getRepository(Produit::class)->find($prod);
+        if (!$panier) {
+            foreach (array_keys($session->get('panier')) as $prod) {
+                $produits[] = $em->getRepository(Produit::class)->find($prod);
+            }
         }
-        $panierCmd = [];
-        $total = $panierService->getTotal();
-        foreach ($produits as $article) {
-            $panierCmd[$article->getId()] = [
-                'nom' => $article->getNom(),
-                'quantite' => $panier[$article->getId()],
-            ];
-            $cmdArticle = new Panier();
-            $cmdArticle->setQuantite($panier[$article->getId()]);
-            $cmdArticle->setProduit($article);
-            $cmdArticle->setCommande($commande);
-            $em->persist($cmdArticle);
-        }
-
+        $total = $this->panierServices->getTotal();
+        $commande = new Commande();
         $form = $this->createForm(CommandeType::class, $commande);
         $form->handleRequest($requete);
-
-        if($form->isSubmitted() && $form->isValid()){
-            $commande->setNumero($commande->genererNum());
-            $commande->setUtilisateur($this->getUser());
-            $commande->setNomComplet($form->get('nomComplet')->getData());
-            $commande->setNomComplet($form->get('adresseLivraison')->getData());
-            $commande->setDateCommande(new \DateTime());
+        if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($produits as $article) {
+                $cmdPanier = new Panier();
+                $cmdPanier->setQuantite($panier[$article->getId()]);
+                $cmdPanier->setProduit($article);
+                $cmdPanier->setCommande($commande);
+                $em->persist($cmdPanier);
+            }
             $commande->setPrixTotal($total);
+            $commande->setNomComplet($form->get('nomComplet')->getData());
+            $commande->setAdresseLivraison($form->get('adresseLivraison')->getData());
+            $commande->setUtilisateur($this->getUser());
             $em->persist($commande);
+            $em->flush();
+            $session->remove('panier');
         }
-        dd($commande);
-        
-        $em->flush();
 
-        $session->remove('panier');
-
-        return $this->redirectToRoute('home');
+        return $this->render('commande/validation.html.twig', [
+            'formCommande' => $form->createView(),
+            'total' => $total,
+            'panier' => $this->panierServices->getPanierPlein(),
+        ]);
     }
 }

@@ -33,7 +33,7 @@ class Panier
     private $quantite;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Commande::class, inversedBy="paniers")
+     * @ORM\ManyToOne(targetEntity=Commande::class, inversedBy="paniers", cascade={"persist"})
      */
     private $commande;
 
