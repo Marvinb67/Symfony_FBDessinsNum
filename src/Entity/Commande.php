@@ -55,6 +55,11 @@ class Commande
      */
     private $adresseLivraison;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $payer;
+
     public function __construct()
     {
         $this->paniers = new ArrayCollection();
@@ -179,5 +184,17 @@ class Commande
 
     public function afficherProduit()
     {
+    }
+
+    public function isPayer(): ?bool
+    {
+        return $this->payer;
+    }
+
+    public function setPayer(bool $payer): self
+    {
+        $this->payer = $payer;
+
+        return $this;
     }
 }

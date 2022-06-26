@@ -2,17 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Commande;
+use App\Repository\CommandeRepository;
+use Stripe\Checkout\Session;
 use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PaiementController extends AbstractController
 {
     /**
-     * @Route("/paiement", name="app_paiement")
+     * @Route("/paiement", name="paiement")
      */
     public function index(): Response
     {
@@ -24,39 +24,63 @@ class PaiementController extends AbstractController
     /**
      * @Route("/checkout", name="checkout")
      */
-    public function checkout(): Response
+    public function checkout(CommandeRepository $cRepo): Response
     {
         $DOMAIN = 'http://127.0.0.1:8000/';
-        $commandes = $doctrine->getRepository(Commande::class)->findAll();
 
         $user = $this->getUser();
+        $commande = $cRepo->findByNumeroCommande($user->getId());
+        $paniers = $commande->getPaniers();
+        $line_items = [];
+
+        foreach ($paniers as $panier) {
+            $line_items[] = [
+                'price_data' => [
+                    'currency' => 'eur',
+                    'product_data' => [
+                        'name' => $panier->getProduit(),
+                    ],
+                    'unit_amount' => $panier->getProduit()->getPrix() * 100,
+                ],
+                'quantity' => 1,
+            ];
+        }
 
         Stripe::setApiKey($this->getParameter('stripe_secret_key'));
 
         $session = Session::create([
-            'payement_method_types' => ['card'],
+            'customer_email' => $user->getEmail(),
+            'payment_method_types' => ['card'],
             'line_items' => [
                 [
-                    'price-data' => [
-                        'currency' => 'euro',
-                        'product_data' => [
-                            'name' => 'Nounours',
-                        ],
-                        'unit_amount' => 15,
-                    ],
-                    'quantity' => 2,
+                    $line_items,
                 ],
             ],
             'mode' => 'payment',
-            'success_url' => 'a faire',
-            'cancel_url' => 'a faire',
+            'success_url' => $DOMAIN.'success',
+            'cancel_url' => $DOMAIN.'cancel',
         ]);
-        // foreach ($paniers as $produit) {
-        //     dd($produit->getProduit());
-        // }
 
-        return $this->render('paiement/index.html.twig', [
-            'controller_name' => 'PaiementController',
+        // dd($session);
+
+        return $this->redirect($session->url);
+    }
+
+    /**
+     * @Route("/success", name="success_paiement")
+     */
+    public function successUrl(): Response
+    {
+        return $this->render('paiement/success.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/cancel", name="cancel_paiement")
+     */
+    public function cancelUrl(): Response
+    {
+        return $this->render('paiement/cancel.html.twig', [
         ]);
     }
 }

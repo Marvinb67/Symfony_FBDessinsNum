@@ -39,6 +39,17 @@ class CommandeRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByNumeroCommande($utilisateur)
+    {
+        return$this->createQueryBuilder('c')
+            ->Where('c.payer = 0')
+            ->andWhere('c.utilisateur = :utilisateur')
+            ->setParameter('utilisateur', $utilisateur)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
 //    /**
 //     * @return Commande[] Returns an array of Commande objects
 //     */

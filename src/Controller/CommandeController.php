@@ -42,10 +42,8 @@ class CommandeController extends AbstractController
         $em = $doctrine->getManager();
         $session = $requete->getSession();
         $panier = $session->get('panier');
-        if (!$panier) {
-            foreach (array_keys($session->get('panier')) as $prod) {
-                $produits[] = $em->getRepository(Produit::class)->find($prod);
-            }
+        foreach (array_keys($session->get('panier')) as $prod) {
+            $produits[] = $em->getRepository(Produit::class)->find($prod);
         }
         $total = $this->panierServices->getTotal();
         $commande = new Commande();
@@ -63,6 +61,7 @@ class CommandeController extends AbstractController
             $commande->setNomComplet($form->get('nomComplet')->getData());
             $commande->setAdresseLivraison($form->get('adresseLivraison')->getData());
             $commande->setUtilisateur($this->getUser());
+            $commande->setPayer(false);
             $em->persist($commande);
             $em->flush();
             $session->remove('panier');
