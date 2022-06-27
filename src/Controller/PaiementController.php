@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
-use App\Repository\CommandeRepository;
-use Stripe\Checkout\Session;
 use Stripe\Stripe;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Facture;
+use Stripe\Checkout\Session;
+use App\Repository\CommandeRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PaiementController extends AbstractController
 {
@@ -42,7 +44,7 @@ class PaiementController extends AbstractController
                     ],
                     'unit_amount' => $panier->getProduit()->getPrix() * 100,
                 ],
-                'quantity' => 1,
+                'quantity' => $panier->getQuantite(),
             ];
         }
 
@@ -69,9 +71,31 @@ class PaiementController extends AbstractController
     /**
      * @Route("/success", name="success_paiement")
      */
-    public function successUrl(): Response
+    public function successUrl(CommandeRepository $cRepo, ManagerRegistry $doctrine): Response
     {
+        $em = $doctrine->getManager();
+        $user = $this->getUser();
+        $commande = $cRepo->findByNumeroCommande($user->getId());
+
+        if($user != $commande->getUtilisateur()){
+            return $this->redirectToRoute('accueil');
+        }
+
+        $commande->setPayer(true);
+        $facture = new Facture;
+        $facture->setNumero($facture->genererNum());
+        $facture->setNom($user->getNom());
+        $facture->setPrenom($user->getPrenom());
+        $facture->setCommande($commande);
+        $facture->setAdresse($commande->getAdresseLivraison());
+        $facture->setCp($commande->getAdresseLivraison()->getCp());
+        $facture->setVille($commande->getAdresseLivraison()->getVille());
+        $facture->setPays($commande->getAdresseLivraison()->getPays());
+        $em->persist($facture);
+        $em->flush();
+
         return $this->render('paiement/success.html.twig', [
+            'facture' => $facture,
         ]);
     }
 
@@ -81,6 +105,17 @@ class PaiementController extends AbstractController
     public function cancelUrl(): Response
     {
         return $this->render('paiement/cancel.html.twig', [
+        ]);
+    }
+
+     /**
+     * @Route("/facture", name="facture")
+     */
+    public function facture(Facture $facture)
+    {
+        dump($facture);
+        return $this->render('paiement/facture.html.twig', [
+            'facture' => $facture,
         ]);
     }
 }

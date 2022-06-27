@@ -65,6 +65,8 @@ class CommandeController extends AbstractController
             $em->persist($commande);
             $em->flush();
             $session->remove('panier');
+
+            return $this->redirectToRoute('paiement');
         }
 
         return $this->render('commande/validation.html.twig', [

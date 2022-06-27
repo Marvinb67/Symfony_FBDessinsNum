@@ -1,7 +1,8 @@
 let img_slider = document.getElementsByClassName('img_slider')
 console.log(img_slider)
 
-let etape = 0
+
+let step = 0
 
 let suivant = document.querySelector('.suivant')
 
@@ -12,6 +13,8 @@ let precedent = document.getElementsByClassName('precedent')
 
 let nb_img = img_slider.length
 
+console.log(nb_img)
+
 function enleverActiveImg() {
     for(let i = 0; i < nb_img; i++){
         img_slider[i].classList.remove('active')
@@ -19,8 +22,9 @@ function enleverActiveImg() {
 }
 
 suivant.addEventListener('click', function() {
-    etape++
+    step++
+    console.log(img_slider[step])
     enleverActiveImg()
-    img_slider[etape].classList.add('active')
+    img_slider[step].classList.add('active')
 })
 

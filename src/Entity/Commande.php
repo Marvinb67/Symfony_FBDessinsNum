@@ -182,10 +182,6 @@ class Commande
         return $this;
     }
 
-    public function afficherProduit()
-    {
-    }
-
     public function isPayer(): ?bool
     {
         return $this->payer;
