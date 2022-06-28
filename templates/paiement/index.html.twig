@@ -3,7 +3,24 @@
 {% block title %}Hello PaiementController!{% endblock %}
 
 {% block body %}
+<h2>Adresse de livraison</h2>
+<div>
+    <p>{{ commande.nomComplet }}</p>
+    <p>{{ commande.AdresseLivraison.adresse}}</p>
+    <p>{{ commande.adresseLivraison.cp}}, {{ commande.adresseLivraison.ville }}</p>
+    <p>{{ commande.adresselivraison.pays }}</p>
+    <p>Téléphone : {{ app.user.telephone }}</p>
+</div>
+
+<h2>Votre commande</h2>
+<div>
+    <p>Produits :</p>
+    {% for panier in paniers %}
+        <p>{{ panier.produit }}</p>
+    {% endfor %}
+    <p>Total : {{ commande.prixTotal }}</p>
+</div>
 <form action="/checkout" method="POST">
-    <button type="submit">Checkout</button>
+    <button type="submit">Passer au paiement</button>
 </form>
 {% endblock %}

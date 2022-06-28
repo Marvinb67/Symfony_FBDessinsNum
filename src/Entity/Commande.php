@@ -60,6 +60,11 @@ class Commande
      */
     private $payer;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Facture::class, inversedBy="commande", cascade={"persist", "remove"})
+     */
+    private $facture;
+
     public function __construct()
     {
         $this->paniers = new ArrayCollection();
@@ -190,6 +195,18 @@ class Commande
     public function setPayer(bool $payer): self
     {
         $this->payer = $payer;
+
+        return $this;
+    }
+
+    public function getFacture(): ?Facture
+    {
+        return $this->facture;
+    }
+
+    public function setFacture(?Facture $facture): self
+    {
+        $this->facture = $facture;
 
         return $this;
     }

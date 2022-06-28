@@ -1,29 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello PaiementController!{% endblock %}
-
 {% block body %}
 <h1>Merci pour votre commande {{app.user}}</h1>
-{{dump(facture)}}
-<h2>Facture</h2>
-<div>
-  <small>{{ facture.dateFactu | date('d/m/Y') }}</small>
-  <p>{{ facture.numero }}</p>
-</div>
-
-<div class="info-boite">
-  <h3>Fayek Bahloul Dessin Numerique</h3>
-  <p>10 Rue des Dessins</p>
-  <p>67100, Strasbourg</p>
-  <p>07 80 90 40 50</p>
-  <p>fayekBahloul@dessins-num.fr</p>
-</div>
-
-<div class="info-client">
-  <h3>{{ facture.prenom}} {{ facture.nom }}</h3>
-  <p>{{ facture.adresse }}</p>
-  <p>{{ facture.cp}} {{ facture.ville}}</p>
-  <p>{{ app.user.telephone }}</p>
-  <p>{{ app.user.email }}</p>
-</div>
 {% endblock %}

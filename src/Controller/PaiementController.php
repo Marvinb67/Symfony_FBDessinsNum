@@ -2,24 +2,33 @@
 
 namespace App\Controller;
 
-use Stripe\Stripe;
+use App\Entity\Commande;
 use App\Entity\Facture;
-use Stripe\Checkout\Session;
 use App\Repository\CommandeRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Stripe\Checkout\Session;
+use Stripe\Stripe;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PaiementController extends AbstractController
 {
     /**
      * @Route("/paiement", name="paiement")
      */
-    public function index(): Response
+    public function index(CommandeRepository $cRepo): Response
     {
+        $user = $this->getUser();
+        $commande = $cRepo->findByNumeroCommande($user->getId());
+        dump($commande);
+        $paniers = $commande->getPaniers();
+
         return $this->render('paiement/index.html.twig', [
-            'controller_name' => 'PaiementController',
+            'commande' => $commande,
+            'paniers' => $paniers,
         ]);
     }
 
@@ -77,12 +86,12 @@ class PaiementController extends AbstractController
         $user = $this->getUser();
         $commande = $cRepo->findByNumeroCommande($user->getId());
 
-        if($user != $commande->getUtilisateur()){
+        if ($user != $commande->getUtilisateur()) {
             return $this->redirectToRoute('accueil');
         }
 
         $commande->setPayer(true);
-        $facture = new Facture;
+        $facture = new Facture();
         $facture->setNumero($facture->genererNum());
         $facture->setNom($user->getNom());
         $facture->setPrenom($user->getPrenom());
@@ -96,6 +105,7 @@ class PaiementController extends AbstractController
 
         return $this->render('paiement/success.html.twig', [
             'facture' => $facture,
+            'commande' => $commande,
         ]);
     }
 
@@ -108,14 +118,32 @@ class PaiementController extends AbstractController
         ]);
     }
 
-     /**
-     * @Route("/facture", name="facture")
+    /**
+     * @Route("/facture/{id}", name="facture")
      */
-    public function facture(Facture $facture)
+    public function telechargerFacture(Commande $commande)
     {
-        dump($facture);
-        return $this->render('paiement/facture.html.twig', [
-            'facture' => $facture,
+        dump($commande);
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
+
+        $html = $this->renderView('test.html.twig', [
+            'sitename' => 'Test facture pdf',
+            'commande' => $commande,
         ]);
+
+        $dompdf->loadHtml($html);
+
+        $dompdf->setPaper('A4', 'portrait');
+
+        $dompdf->render();
+
+        $dompdf->stream('mypdf.pdf', [
+            'Attachment' => false,
+        ]);
+
+        exit(0);
     }
 }

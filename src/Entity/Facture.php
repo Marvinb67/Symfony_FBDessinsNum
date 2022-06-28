@@ -38,11 +38,6 @@ class Facture
     private $dateFactu;
 
     /**
-     * @ORM\OneToOne(targetEntity=Commande::class, cascade={"persist", "remove"})
-     */
-    private $commande;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $adresse;
@@ -61,6 +56,11 @@ class Facture
      * @ORM\Column(type="string", length=255)
      */
     private $pays;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Commande::class, mappedBy="facture", cascade={"persist", "remove"})
+     */
+    private $commande;
 
     public function __construct()
     {
@@ -120,18 +120,6 @@ class Facture
         return $this;
     }
 
-    public function getCommande(): ?Commande
-    {
-        return $this->commande;
-    }
-
-    public function setCommande(?Commande $commande): self
-    {
-        $this->commande = $commande;
-
-        return $this;
-    }
-
     public function genererNum()
     {
         $jour = date('Ymd');
@@ -186,5 +174,32 @@ class Facture
         $this->pays = $pays;
 
         return $this;
+    }
+
+    public function getCommande(): ?Commande
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(?Commande $commande): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($commande === null && $this->commande !== null) {
+            $this->commande->setFacture(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($commande !== null && $commande->getFacture() !== $this) {
+            $commande->setFacture($this);
+        }
+
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->numero;
     }
 }

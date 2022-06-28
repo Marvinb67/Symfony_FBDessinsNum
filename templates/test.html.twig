@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PanierController!{% endblock %}
+
+{% block body %}
+<h1>Facture</h1>
+<div>
+    <small>Date de facturation : {{ commande.facture.dateFactu | date('d/m/Y') }}</small>
+    <p>Numéro de la facture : {{ commande.facture.numero }}</p>
+</div>
+
+<div class="info-boite">
+    <p>Fayek Bahloul Dessin Numerique</p>
+    <p>10 Rue des Dessins</p>
+    <p>67100, Strasbourg</p>
+    <p>07 80 90 40 50</p>
+    <p>fayekBahloul@dessins-num.fr</p>
+</div>
+
+<div class="info-client">
+    <p>{{commande.nomComplet}}</p>
+    <p>{{ commande.facture.adresse }}</p>
+    <p>{{ commande.facture.cp}} {{ commande.facture.ville}}</p>
+    <p>{{ app.user.telephone }}</p>
+    <p>{{ app.user.email }}</p>
+</div>
+
+<table class="table">
+    <thead>
+        <th>Nom</th>
+        <th>Quantité</th>
+        <th>Prix Unitaire</th>
+        <th>Total</th>
+    </thead>
+    <tbody>
+        {% for panier in commande.paniers %}
+        <tr>
+            <td>{{ panier.produit }}</td>
+            <td>{{ panier.quantite }}</td>
+            <td>{{ panier.produit.prix }}</td>
+            <td>{{ panier.produit.prix * panier.quantite }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
