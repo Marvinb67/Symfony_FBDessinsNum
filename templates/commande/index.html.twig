@@ -15,7 +15,6 @@
             <li>Produits : {{item.produit}} {{item.quantite}}</li>
         {% endfor %}
         <li>Facture n°{{ commande.facture }} : <a href="{{ path('facture', {'id': commande.id} ) }}">Télecharger</a></li>
-        {{ dump(commande.facture.id) }}
     </ul>
 </div>
 {% endfor %}

@@ -3,4 +3,5 @@
 {% block title %}Hello PaiementController!{% endblock %}
 {% block body %}
 <h1>Merci pour votre commande {{app.user}}</h1>
+ <li>Facture n°{{ commande.facture }} : <a href="{{ path('facture', {'id': commande.id} ) }}">Télecharger</a></li>
 {% endblock %}

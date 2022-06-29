@@ -42,6 +42,11 @@ class CommandeController extends AbstractController
         $em = $doctrine->getManager();
         $session = $requete->getSession();
         $panier = $session->get('panier');
+        
+        if(!$panier){
+            return $this->redirectToRoute('index_boutique');
+        }
+
         foreach (array_keys($session->get('panier')) as $prod) {
             $produits[] = $em->getRepository(Produit::class)->find($prod);
         }

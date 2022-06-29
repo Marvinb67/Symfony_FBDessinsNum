@@ -3,48 +3,103 @@
 
 <head>
     <meta charset="UTF-8">
+    <style>
+        .titre-facture{
+            color: #e91e63;
+        }
+
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        tr, th{
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 0.5em;
+        }
+
+        tr:nth-child(even) {
+             background-color: #dddddd;
+        }
+
+        .facture-container{
+            position: relative;
+            margin: 1em;
+        }
+
+        .total{
+            text-align: center
+        }
+
+        .information{
+            color: #e91e63;
+            font-weight: bold;
+        }
+
+        .info-client{
+           position: absolute;
+           right: 0;
+           top: 0
+        }
+
+    </style>
 </head>
 
 <body>
-    <h2>Facture</h2>
+
+    <img src="{{ asset('image/dessins/Dessin600.jpg') }}">
+    <h2 class="titre-facture">Facture</h2>
     <div>
         <small>Date de facturation : {{ commande.facture.dateFactu | date('d/m/Y') }}</small>
         <p>Numéro de la facture : {{ commande.facture.numero }}</p>
     </div>
 
-    <div class="info-boite">
-        <p>Fayek Bahloul Dessin Numerique</p>
-        <p>10 Rue des Dessins</p>
-        <p>67100, Strasbourg</p>
-        <p>07 80 90 40 50</p>
-        <p>fayekBahloul@dessins-num.fr</p>
+    <div class="facture-container">
+        <div class="info-boite">
+            <p class="information">Information de l'entreprise</p class="information">
+            <p>Fayek Bahloul Dessin Numerique</p>
+            <p>10 Rue des Dessins</p>
+            <p>67100, Strasbourg</p>
+            <p>07 80 90 40 50</p>
+            <p>fayekBahloul@dessins-num.fr</p>
+        </div>
+
+        <div class="info-client">
+            <p class="information">Information de l'entreprise</p class="information">
+            <p>{{commande.nomComplet}}</p>
+            <p>{{ commande.facture.adresse }}</p>
+            <p>{{ commande.facture.cp}} {{ commande.facture.ville}}</p>
+            <p>{{ app.user.telephone }}</p>
+            <p>{{ app.user.email }}</p>
+        </div>
     </div>
 
-    <div class="info-client">
-        <p>{{commande.nomComplet}}</p>
-        <p>{{ commande.facture.adresse }}</p>
-        <p>{{ commande.facture.cp}} {{ commande.facture.ville}}</p>
-        <p>{{ app.user.telephone }}</p>
-        <p>{{ app.user.email }}</p>
-    </div>
-
-    <table class="table">
+    <table class="text-danger">
         <thead>
+        <tr>
             <th>Nom</th>
             <th>Quantité</th>
             <th>Prix Unitaire</th>
             <th>Total</th>
+        </tr>
         </thead>
         <tbody>
             {% for panier in commande.paniers %}
             <tr>
                 <td>{{ panier.produit }}</td>
                 <td>{{ panier.quantite }}</td>
-                <td>{{ panier.produit.prix }}</td>
-                <td>{{ panier.produit.prix * panier.quantite }}</td>
+                <td>{{ panier.produit.prix }}€</td>
+                <td>{{ panier.produit.prix * panier.quantite }}€</td>
             </tr>
             {% endfor %}
         </tbody>
+        <tfoot>
+            <tr>
+                <th >Total commande</th>
+                <td scope="row" colspan="3" class="total">{{ commande.prixTotal }}€</td>
+            </tr>
+        </tfoot>
     </table>
 </body>
 

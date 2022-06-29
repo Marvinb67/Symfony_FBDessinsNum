@@ -123,17 +123,20 @@ class PaiementController extends AbstractController
      */
     public function telechargerFacture(Commande $commande)
     {
-        dump($commande);
+
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
         $options->set('isRemoteEnabled', true);
+        $options->set('defaultFont', 'courier');
+
         $dompdf = new Dompdf($options);
 
-        $html = $this->renderView('test.html.twig', [
+        $html = $this->renderView('paiement/facture.html.twig', [
             'sitename' => 'Test facture pdf',
             'commande' => $commande,
         ]);
 
+        $dompdf->setBasePath('laragon\www\Marvin\Symfony_FBDessinsNum\public');
         $dompdf->loadHtml($html);
 
         $dompdf->setPaper('A4', 'portrait');
