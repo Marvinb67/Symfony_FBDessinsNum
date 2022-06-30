@@ -15,6 +15,12 @@ class PanierController extends AbstractController
      */
     public function index(PanierService $panierService)
     {
+        if(!$this->getUser()){
+
+            $this->addFlash('error', 'Vous devez vous connecter pour accèder à votre panier');
+            return $this->redirectToRoute('acceuil');
+        }
+        
         return $this->render('panier/index.html.twig', [
             'dataPanier' => $panierService->getPanierPlein(),
             'total' => $panierService->getTotal(),

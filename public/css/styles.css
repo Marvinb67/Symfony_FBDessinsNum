@@ -16,8 +16,8 @@ body{
     width: 1200px;
 }
 
- #big-wrap{
-    height: 100vh; 
+ #grand-wrap{
+    min-height: 100vh; 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -39,12 +39,14 @@ main{
     position: absolute;
     top: 0;
     left: 0;
-    /* transition-property: opacity;
-    transition-duration: 3s;
-    opacity: 0; */
+    opacity: 0;
+    transition: opacity 1s;
     
 }
 
+.img_slider.active{
+    opacity: 1;
+}
 .suivant, .precedent{
     color: #e91e63;
     font-size: 3em;
@@ -53,9 +55,6 @@ main{
     transform: translatey(-50%);
 }
 
-.img_slider:active{
-    /* opacity: 1; */
-}
 
 
 .suivant{
@@ -213,7 +212,7 @@ footer a{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     width: 30%;
-    margin: 0 1em;
+    margin: 1em;
   }
   
   /* On mouse-over, add a deeper shadow */
@@ -239,17 +238,20 @@ footer a{
     background-image: url('public/image/logo/aPropos.jpg')
 }
 
-.produit-container{
-    display: flex;
-    justify-content: space-evenly;
+.produit-grid{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 2%;
 }
 
+.produit-grid img{
+    width: 100%;
+}
 .sidebar {
     margin: 0;
     padding: 1.5em 1em;
     width: 200px;
     background-color: #f1f1f1;
-    height: 100%;
     overflow: auto;
 }
 

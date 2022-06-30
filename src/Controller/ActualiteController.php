@@ -31,23 +31,23 @@ class ActualiteController extends AbstractController
     public function show(Actualite $actualite, ManagerRegistry $doctrine, Request $requete): Response
     {
         $em = $doctrine->getManager();
+
         $commentaire = new Commentaire();
         $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($requete);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $commentaire = $form->getData();
-            $commentaire->setUtilisateur($this->getUser());
-            $commentaire->setActualite($actualite);
-            $commentaire->setActif(true);
-
-            $em->persist($commentaire);
-            $em->flush();
-
-            return $this->redirectToRoute('show_actualite', [
-                'id' => $actualite->getId(),
-            ]);
-        }
-
+            if ($form->isSubmitted() && $form->isValid()) {
+                $commentaire = $form->getData();
+                $commentaire->setUtilisateur($this->getUser());
+                $commentaire->setActualite($actualite);
+                $commentaire->setActif(true);
+    
+                $em->persist($commentaire);
+                $em->flush();
+    
+                return $this->redirectToRoute('show_actualite', [
+                    'id' => $actualite->getId(),
+                ]);
+            }
         $commentaire_list = $actualite->getCommentaires();
 
         return $this->render('actualite/show.html.twig', [
