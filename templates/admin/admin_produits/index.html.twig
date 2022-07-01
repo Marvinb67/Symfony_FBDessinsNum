@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminproduitController!{% endblock %}
+{% block title %}Admin Produit{% endblock %}
 
 {% block body %}
 <h1>Gérer les produits</h1>
 <h2>Il y a actuellement {{ produits | length() }} produits</h2>
-<a href="{{ path('admin_produits_ajout') }}" class="btn btn-success">Ajouter</a>
+<a href="{{ path('admin_produits_ajout') }}" class="btn btn-success">Ajouter un produit</a>
 
 <table class="table table-striped">
     <thead>

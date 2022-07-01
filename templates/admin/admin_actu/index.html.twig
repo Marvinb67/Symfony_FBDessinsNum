@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminactualiteController!{% endblock %}
+{% block title %}Admin Actualités{% endblock %}
 
 {% block body %}
-<h1>Gérer les categories</h1>
+<h1>Actualités/h1>
 <h2>Il y a actuellement {{ actualites | length() }} actualités</h2>
-<a href="{{ path('ajout_actu') }}">Ajouter</a>
+<a href="{{ path('ajout_actu') }}">Ajouter une actualités</a>
 
 <table class="table table-striped">
     <thead>

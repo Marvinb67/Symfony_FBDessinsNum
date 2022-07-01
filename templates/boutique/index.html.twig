@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BoutiqueController!{% endblock %}
+{% block title %}Boutique{% endblock %}
 
 {% block body %}
+{% for message in app.flashes('success') %}
+  <p class="alert alert-success">{{ message }}</p>
+{% endfor %}
+{% for message in app.flashes('erreur') %}
+  <p class="alert alert-danger">{{ message }}</p>
+{% endfor %}
 <h1>Réalisations</h1>
 <div class="row">
   {% for real in produits %}
@@ -19,6 +25,14 @@
   </div>
       {% endfor %}
 </div>
-
+<script>
+  let favoris = document.querySelectorAll('.fa-heart')
+  console.log(favoris)
+  favoris.forEach(function(favori){
+    favori.addEventListener('click', function() {
+      favori.style.color = "red"
+    })
+  })
+</script>
 {% endblock %}
 

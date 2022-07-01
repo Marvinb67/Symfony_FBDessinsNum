@@ -27,10 +27,17 @@ class FavorisController extends AbstractController
      */
     public function ajoutFavoris(ManagerRegistry $doctrine, Produit $produit): Response
     {
-        $em = $doctrine->getManager();
-        $this->getUser()->addFavori($produit);
+        if ($this->getUser()->getFavoris($produit)) {
+            $this->addFlash('erreur', 'Produit déja dans les favoris');
+            $this->redirectToRoute('index_boutique');
+        } else {
+            $em = $doctrine->getManager();
+            $this->getUser()->addFavori($produit);
 
-        $em->flush();
+            $em->flush();
+
+            $this->addFlash('success', 'Produit ajouté au favoris');
+        }
 
         return $this->redirectToRoute('index_boutique');
     }

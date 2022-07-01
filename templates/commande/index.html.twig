@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CommandeController!{% endblock %}
+{% block title %}Mes commandes{% endblock %}
 
 {% block body %}
 <h1 class="text-center">Mes commandes</h1>
@@ -10,7 +10,7 @@
     <ul>
         <li>Numéro de commande : {{ commande.numero }}</li>
         <li>Date de commande : {{ commande.dateCommande | date('d/m/Y H:i:s') }}</li>
-        <li>Adresse de livraison : {{ commande.adresseLivraison }}</li>
+        <li>Adresse de livraison : {{ commande.adresseLivraison.adresse }}</li>
         {% for item in commande.paniers %}
             <li>Produits : {{item.produit}} {{item.quantite}}</li>
         {% endfor %}

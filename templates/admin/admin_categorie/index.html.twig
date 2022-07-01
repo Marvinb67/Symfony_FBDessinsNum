@@ -3,9 +3,9 @@
 {% block title %}Hello AdminCategorieController!{% endblock %}
 
 {% block body %}
-<h1>Gérer les categories</h1>
+<h1>Categories</h1>
 <h2>Il y a actuellement {{ categories | length() }} catégories</h2>
-<a href="{{ path('admin_categorie_ajout') }}">Ajouter</a>
+<a href="{{ path('admin_categorie_ajout') }}">Ajouter une catégorie</a>
 
 <table class="table table-striped">
     <thead>
