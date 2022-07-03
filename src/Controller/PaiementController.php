@@ -86,11 +86,15 @@ class PaiementController extends AbstractController
         $user = $this->getUser();
         $commande = $cRepo->findByNumeroCommande($user->getId());
 
+        // Si l'utilisateur n'a pas de commande on le redirige
         if ($user != $commande->getUtilisateur()) {
             return $this->redirectToRoute('accueil');
         }
 
+        //Si le paiement est passer on change la valeurs du champs payer de la commande
         $commande->setPayer(true);
+
+        // Puis une génère une facture
         $facture = new Facture();
         $facture->setNumero($facture->genererNum());
         $facture->setNom($user->getNom());
@@ -100,6 +104,7 @@ class PaiementController extends AbstractController
         $facture->setCp($commande->getAdresseLivraison()->getCp());
         $facture->setVille($commande->getAdresseLivraison()->getVille());
         $facture->setPays($commande->getAdresseLivraison()->getPays());
+
         $em->persist($facture);
         $em->flush();
 
@@ -123,7 +128,6 @@ class PaiementController extends AbstractController
      */
     public function telechargerFacture(Commande $commande)
     {
-
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
         $options->set('isRemoteEnabled', true);

@@ -47,7 +47,6 @@ class PanierService
                 --$panier[$id];
             } else {
                 // Sinon on le supprime entierement
-
                 unset($panier[$id]);
             }
         }

@@ -21,7 +21,7 @@
         <li>Email : {{ app.user.email }} </li>
         <li>Téléphone : {{ app.user.telephone }} </li>
         {% for adresse in app.user.adresses %}
-            <li>Adresse : {{ adresse }} </li>
+            <li>Adresse : {{ adresse.adresse }} </li>
         {% endfor %}
     </ul>
     <a href="{{ path('modifier_compte')}}" class="btn btn-primary">Modifier le profil</a>

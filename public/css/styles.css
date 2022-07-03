@@ -124,10 +124,6 @@ header nav ul li{
     padding: 1.5em;
 }
 
-#agreeTerms{
-    text-align: center;
-}
-
 .btn-register{
     padding: 1em;
     background-color: #e91e63;
@@ -153,7 +149,8 @@ footer{
 }
 
 footer h3{
-    text-align: center;
+    /* text-align: center; */
+    padding: 0 1em;
 }
 
 .footer-img{

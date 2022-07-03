@@ -119,10 +119,10 @@ class Adresse
         return $this;
     }
 
-    // public function __toString()
-    // {
-    //     return $this->adresse.' - '.$this->ville.' - '.$this->cp;
-    // }
+    public function __toString()
+    {
+        return $this->adresse.' - '.$this->ville.' - '.$this->cp;
+    }
 
     /**
      * @return Collection<int, Commande>

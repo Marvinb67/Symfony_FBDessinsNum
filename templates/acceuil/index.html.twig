@@ -8,10 +8,9 @@
     <h1>Fayek Bahloul</h1>
     <p>Artiste spécialisé en dessin assister par ordinateur (DAO)</p>
     <button class="button"><a href="{{ path('index_boutique') }}" class="text-dark">Voir mes oeuvres</a></button>
-</div>-->
+</div> -->
 
-<h2>Dernieres créations</h2>
-
+<h2>Dernières créations</h2>
 <div class="slider">
     {% for produit in produits %}
         <img src="{{ asset('image/dessins/' ~ produit.image) }}" alt="{{ produit }}" class="img_slider active">
