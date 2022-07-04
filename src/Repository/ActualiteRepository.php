@@ -42,12 +42,14 @@ class ActualiteRepository extends ServiceEntityRepository
     public function findDernieresActu()
     {
         return $this->createQueryBuilder('a')
+            ->Where('a.actif = 1')
             ->orderBy('a.poster_le', 'DESC')
             ->setMaxResults(3)
             ->getQuery()
             ->getResult()
         ;
     }
+
 //    /**
 //     * @return Actualite[] Returns an array of Actualite objects
 //     */
