@@ -3,13 +3,10 @@
 {% block title %}Acceuil{% endblock %}
 
 {% block body %}
-<!-- <div id="hero">
-    <img src="{{ asset('image/dessin/bas-rhin_art-numerique_fayek-bahloul_figuratif-47.jpg') }}" alt="">
-    <h1>Fayek Bahloul</h1>
-    <p>Artiste spécialisé en dessin assister par ordinateur (DAO)</p>
-    <button class="button"><a href="{{ path('index_boutique') }}" class="text-dark">Voir mes oeuvres</a></button>
-</div> -->
-
+<section class="présentation-site">
+    <h1>Fayek Bahloul : Dessins Numérique</h1>
+    <p>Bienvenue sur ma boutique, vous y trouverez tous les <strong>dessins numérique</strong> que j'ai réaliser et qui me tienne à coeur mais aussi toutes les <strong>actualités</strong> me conrcenant moi ou mes futurs ouvre.</p>
+</section>
 <h2>Dernières créations</h2>
 <div class="slider">
     {% for produit in produits %}
@@ -22,5 +19,30 @@
         <i class="fa-solid fa-angle-left"></i>
     </div>
 </div>
+
+<section class="présentation-artiste">
+    <img src="{{ asset('image/logo/aPropos.jpg') }}" alt="presentation-artiste">
+    <article>
+        <p>
+            Je m'appelle Fayek Bahloul, je suis passioné par l'art et plus particulièrement le <strong>Dessin Assisté par Ordinateur</strong> (DAO).
+            J'ai commencé la DAO il y a une dizaine d'années sur un coup de tête et je me suis tout de suite pris au jeux.
+            Etant malvoyant, la DAO est un excellent moyen pour moi d'éxprimer ma vision du monde et mon art.
+            Cette boutique est un moyen pour moi de montrer mon travail au plus de personnes possible et pourquoi me permettre de vivre de ma passion.
+        </p>
+    </article>
+</section>
+<section class="dernieres-actu">
+    <h2>Dernières Actualités</h2>
+    {% for actu in actualites %}
+        <article class="carte">
+            <div class="carte-container">
+                <h3><a href="{{ path('show_actualite', {'id': actu.id}) }}" class="text-secondary">{{ actu }}</a></h3>
+                <p>{{ actu.contenue }}</p>
+                <small>{{ actu.utilisateur }}</small>
+                <small>Poster le : {{ actu.posterLe | date('d-m-Y H:i:s') }}</small>
+            </div>
+        </article>
+    {% endfor %}
+</section>
 <script src="{{ asset('js/script.js') }}"></script>
 {% endblock %}
