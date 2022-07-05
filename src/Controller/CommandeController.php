@@ -27,7 +27,8 @@ class CommandeController extends AbstractController
      */
     public function index(ManagerRegistry $doctrine): Response
     {
-        $commandes = $doctrine->getRepository(Commande::class)->findAll();
+        $user = $this->getUser();
+        $commandes = $user->getCommandes();
 
         return $this->render('commande/index.html.twig', [
             'commandes' => $commandes,
@@ -43,6 +44,9 @@ class CommandeController extends AbstractController
         $session = $requete->getSession();
         $panier = $session->get('panier');
         
+        if(!$this->getUser()->getAdresses()->getValues()){
+            $this->redirectToRoute('ajouter_adresse');
+        }
         if(!$panier){
             return $this->redirectToRoute('index_boutique');
         }

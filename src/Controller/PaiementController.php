@@ -22,7 +22,7 @@ class PaiementController extends AbstractController
     public function index(CommandeRepository $cRepo): Response
     {
         $user = $this->getUser();
-        $commande = $cRepo->findByNumeroCommande($user->getId());
+        $commande = $cRepo->findByCommandeNonPayer($user->getId());
         dump($commande);
         $paniers = $commande->getPaniers();
 
@@ -40,7 +40,7 @@ class PaiementController extends AbstractController
         $DOMAIN = 'http://127.0.0.1:8000/';
 
         $user = $this->getUser();
-        $commande = $cRepo->findByNumeroCommande($user->getId());
+        $commande = $cRepo->findByCommandeNonPayer($user->getId());
         $paniers = $commande->getPaniers();
         $line_items = [];
 
@@ -84,7 +84,7 @@ class PaiementController extends AbstractController
     {
         $em = $doctrine->getManager();
         $user = $this->getUser();
-        $commande = $cRepo->findByNumeroCommande($user->getId());
+        $commande = $cRepo->findByCommandeNonPayer($user->getId());
 
         // Si l'utilisateur n'a pas de commande on le redirige
         if ($user != $commande->getUtilisateur()) {
@@ -135,18 +135,20 @@ class PaiementController extends AbstractController
 
         $dompdf = new Dompdf($options);
 
+        // $html = "<img src='C:\laragon\www\Marvin\Symfony_FBDessinsNum\public\image\logo\logo_white_fbdn.png'>";
+
         $html = $this->renderView('paiement/facture.html.twig', [
             'sitename' => 'Test facture pdf',
             'commande' => $commande,
         ]);
 
-        $dompdf->setBasePath('laragon\www\Marvin\Symfony_FBDessinsNum\public');
+        
         $dompdf->loadHtml($html);
-
+        
         $dompdf->setPaper('A4', 'portrait');
-
+        
         $dompdf->render();
-
+        
         $dompdf->stream('mypdf.pdf', [
             'Attachment' => false,
         ]);

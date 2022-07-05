@@ -39,7 +39,7 @@ class CommandeRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByNumeroCommande($utilisateur)
+    public function findByCommandeNonPayer($utilisateur)
     {
         return$this->createQueryBuilder('c')
             ->Where('c.payer = 0')

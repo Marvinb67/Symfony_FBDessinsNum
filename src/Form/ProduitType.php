@@ -22,7 +22,11 @@ class ProduitType extends AbstractType
         $builder
             ->add('nom', TextType::class)
             ->add('description', TextareaType::class)
-            ->add('prix', NumberType::class)
+            ->add('prix', NumberType::class, [
+                'attr' => [
+                    'min' => 1,
+                ]
+            ])
             ->add('largeur', NumberType::class)
             ->add('hauteur', NumberType::class)
             ->add('categorie', EntityType::class, [

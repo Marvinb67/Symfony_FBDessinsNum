@@ -45,7 +45,7 @@ class Actualite
     private $utilisateur;
 
     /**
-     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="actualite")
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="actualite", orphanRemoval=true)
      */
     private $commentaires;
 

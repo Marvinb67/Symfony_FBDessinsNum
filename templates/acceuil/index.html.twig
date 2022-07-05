@@ -3,11 +3,12 @@
 {% block title %}Acceuil{% endblock %}
 
 {% block body %}
-<section class="présentation-site">
+<section class="presentation-site">
+    {# <img src="{{ asset('image/logo/wave-photo-paint-modern-artwork-art-143350-pxhere.com.jpg') }}" alt="presentation-artiste"> #}
     <h1>Fayek Bahloul : Dessins Numérique</h1>
     <p>Bienvenue sur ma boutique, vous y trouverez tous les <strong>dessins numérique</strong> que j'ai réaliser et qui me tienne à coeur mais aussi toutes les <strong>actualités</strong> me conrcenant moi ou mes futurs ouvre.</p>
 </section>
-<h2>Dernières créations</h2>
+
 <div class="slider">
     {% for produit in produits %}
         <img src="{{ asset('image/dessins/' ~ produit.image) }}" alt="{{ produit }}" class="img_slider active">
@@ -20,8 +21,8 @@
     </div>
 </div>
 
-<section class="présentation-artiste">
-    <img src="{{ asset('image/logo/aPropos.jpg') }}" alt="presentation-artiste">
+<section class="presentation-artiste">
+    <img src="{{ asset('image/logo/pexels-cottonbro-3779014.jpg')}}" alt="presentation-site">
     <article>
         <p>
             Je m'appelle Fayek Bahloul, je suis passioné par l'art et plus particulièrement le <strong>Dessin Assisté par Ordinateur</strong> (DAO).
