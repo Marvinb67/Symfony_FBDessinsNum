@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ActualiteRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use App\Repository\ActualiteRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=ActualiteRepository::class)
@@ -40,7 +41,8 @@ class Actualite
     private $poster_le;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="actualites", )
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="actualites")
+     * @JoinColumn( onDelete="SET NULL")
      */
     private $utilisateur;
 

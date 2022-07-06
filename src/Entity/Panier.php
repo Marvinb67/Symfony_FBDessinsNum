@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\PanierRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PanierRepository;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * @ORM\Entity(repositoryClass=PanierRepository::class)
@@ -24,6 +25,7 @@ class Panier
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="paniers")
+     * @JoinColumn( onDelete="SET NULL")
      */
     private $utilisateur;
 

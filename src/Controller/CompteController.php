@@ -8,6 +8,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -74,6 +75,24 @@ class CompteController extends AbstractController
         return $this->render('compte/modifMdp.html.twig', [
             'formModifMdp' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/compte/suppression/{id}", name="suppression_compte")
+     */
+    public function suppressionCompte(ManagerRegistry $doctrine)
+    {
+        $user = $this->getUser();
+        $em = $doctrine->getManager();
+        
+        $session = new Session();
+        $session->invalidate();
+
+        $em->remove($user);
+        $em->flush();
+
+        return $this->redirectToRoute('acceuil');
+
     }
 }
 

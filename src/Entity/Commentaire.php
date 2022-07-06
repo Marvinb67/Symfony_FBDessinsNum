@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentaireRepository;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommentaireRepository;
 
 /**
  * @ORM\Entity(repositoryClass=CommentaireRepository::class)
@@ -29,7 +30,7 @@ class Commentaire
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="commentaires")
-     * @ORM\JoinColumn(nullable=false)
+     * @JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $utilisateur;
 

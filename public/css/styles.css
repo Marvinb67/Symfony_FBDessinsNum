@@ -235,6 +235,10 @@ footer a{
     background-image: url('public/image/logo/aPropos.jpg')
 }
 
+.presentation-site{
+    text-align: center;
+}
+
 .presentation-site img{
     width: 100%;
     height: 150px;

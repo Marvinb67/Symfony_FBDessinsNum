@@ -1,33 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Boutique{% endblock %}
-
-{% block body %}
-{% for message in app.flashes('success') %}
-  <p class="alert alert-success">{{ message }}</p>
-{% endfor %}
-{% for message in app.flashes('erreur') %}
-  <p class="alert alert-danger">{{ message }}</p>
-{% endfor %}
-<h1>Réalisations</h1>
-<div class="row">
-  {% for real in produits %}
-  <div class="col-sm-4">
-      <div class="card mb-2 py-2">
-        <img src="image/dessins/{{ real.image }}" alt="{{ real.nom }}" class="card-img-top carte-img">
-          <div class="card-body">
-              <a href="{{ path('detail_produit', {'id': real.id})}}"><h2 class="card-title">{{ real }}</h2></a>
-              <p class="card-text">{{ real.description }}</p>
-              <p class="small">{{ real.dimensions }} <span class="small">{{ real.prix }} €</span></p>
-              {% if real in app.user.favoris %}
-              <p><a href="{{ path('ajout_panier', {'id': real.id}) }}" class="btn btn-primary w-5">Ajouter au panier</a> <a href="{{ path('ajout_favoris', {'id': real.id}) }}"><i class="fa-solid fa-heart text-danger"></i></a></p>
-              {% else %}
-              <p><a href="{{ path('ajout_panier', {'id': real.id}) }}" class="btn btn-primary w-5">Ajouter au panier</a> <a href="{{ path('ajout_favoris', {'id': real.id}) }}"><i class="fa-solid fa-heart"></i></a></p>
-              {% endif %}
-          </div>
-      </div>
-  </div>
-      {% endfor %}
-</div>
+{% block title %}Boutique
 {% endblock %}
 
+{% block body %}
+	{% for message in app.flashes('success') %}
+		<p class="alert alert-success text-center">{{ message }}</p>
+	{% endfor %}
+	{% for message in app.flashes('erreur') %}
+		<p class="alert alert-danger text-center">{{ message }}</p>
+	{% endfor %}
+	<h1>Réalisations</h1>
+	<div class="row">
+		{% for real in produits %}
+			<div class="col-sm-4">
+				<div class="card mb-2 py-2">
+					<img src="image/dessins/{{ real.image }}" alt="{{ real.nom }}" class="card-img-top carte-img">
+					<div class="card-body">
+						<a href="{{ path('detail_produit', {'id': real.id})}}">
+							<h2 class="card-title">{{ real }}</h2>
+						</a>
+						<p class="card-text">{{ real.description }}</p>
+						<p class="small">{{ real.dimensions }}
+							<span class="small">{{ real.prix }}
+								€</span>
+						</p>
+						{% if real in app.user.favoris %}
+							<p>
+								<a href="{{ path('ajout_panier', {'id': real.id}) }}" class="btn btn-primary w-5">Ajouter au panier</a>
+								<a href="{{ path('ajout_favoris', {'id': real.id}) }}">
+									<i class="fa-solid fa-heart text-danger"></i>
+								</a>
+							</p>
+						{% else %}
+							<p>
+								<a href="{{ path('ajout_panier', {'id': real.id}) }}" class="btn btn-primary w-5">Ajouter au panier</a>
+								<a href="{{ path('ajout_favoris', {'id': real.id}) }}">
+									<i class="fa-solid fa-heart"></i>
+								</a>
+							</p>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

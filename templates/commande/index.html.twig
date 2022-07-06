@@ -4,7 +4,12 @@
 
 {% block body %}
 <h1 class="text-center">Mes commandes</h1>
-
+{% if commandes is empty %}
+<section class="text-center">
+    <h2>Vous n'avez aucune commandes pour l'instant</h2>
+    <a href="{{ path('index_boutique')}}" class="btn btn-primary">Aller vers la boutique !</a>
+</section>
+{% else %}
 {% for commande in commandes %}
 <div class="commande">
     <ul>
@@ -18,4 +23,6 @@
     </ul>
 </div>
 {% endfor %}
+{% endif %}
+
 {% endblock %}

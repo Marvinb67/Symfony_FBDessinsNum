@@ -77,6 +77,16 @@ class AdminProduitsController extends AbstractController
     {
         $em = $doctrine->getManager();
 
+        $image = $produit->getImage();
+
+        if ($image) {
+            $nomImage = $this->getParameter("image_upload") . '/' . $image;
+
+            if(file_exists($nomImage)){
+                unlink($nomImage);
+            }
+        }
+
         $em->remove($produit);
 
         $em->flush();

@@ -2,7 +2,11 @@
 <div class="commentaire">
     {% for com in commentaire_list %}
     {% if com.actif == true %}
+    {% if com.utilisateur is null %}
+    <small>Utilisateur supprimé <small>Poster le : {{ com.posterLe | date('d/m/Y H:i:s') }}</small></small>
+    {% else %}
     <small>{{ com.utilisateur }} <small>Poster le : {{ com.posterLe | date('d/m/Y H:i:s') }}</small></small>
+    {% endif %}
     <p>{{ com.contenue }}</p>
     {% endif %}
     {% endfor %}

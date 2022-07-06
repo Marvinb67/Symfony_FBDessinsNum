@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminCategorieController!{% endblock %}
+
+{% block body %}
+<h1>Commande</h1>
+<h2>Il y a actuellement {{ commandes | length() }} commandes</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Numéro</th>
+            <th>Client</th>
+            <th>Date de commande</th>
+            <th>Total</th>
+            <th>Facture</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        {% for commande in commandes %}
+            <tr>                
+                <td>{{ commande.numero }}</td> 
+                <td>{{ commande.nomComplet }}</td>
+                <td>{{commande.dateCommande | date('d/m/Y') }}</td>
+                <td>{{commande.prixTotal }}</td>
+                <td>{{commande.facture }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

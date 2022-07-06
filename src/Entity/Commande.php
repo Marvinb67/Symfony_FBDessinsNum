@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\CommandeRepository;
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=CommandeRepository::class)
@@ -37,6 +38,7 @@ class Commande
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="commandes")
+     * @JoinColumn( onDelete="SET NULL")
      */
     private $utilisateur;
 
