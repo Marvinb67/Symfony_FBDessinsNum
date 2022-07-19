@@ -78,13 +78,13 @@ class CompteController extends AbstractController
     }
 
     /**
-     * @Route("/compte/suppression/{id}", name="suppression_compte")
+     * @Route("/compte/suppression", name="suppression_compte")
      */
     public function suppressionCompte(ManagerRegistry $doctrine)
     {
         $user = $this->getUser();
         $em = $doctrine->getManager();
-        
+
         $session = new Session();
         $session->invalidate();
 
@@ -92,7 +92,6 @@ class CompteController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('acceuil');
-
     }
 }
 

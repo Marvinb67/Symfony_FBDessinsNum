@@ -2,11 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinColumn;
 use App\Repository\AdresseRepository;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=AdresseRepository::class)
@@ -37,7 +36,6 @@ class Adresse
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="adresses")
-     * @JoinColumn( onDelete="SET NULL")
      */
     private $utilisateur;
 

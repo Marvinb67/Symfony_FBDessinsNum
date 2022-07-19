@@ -34,12 +34,12 @@ precedent.addEventListener('click', function() {
     img_slider[etape].classList.add('active')
 })
 
-// setInterval(function () {
-//     etape++
-//     if(etape >= nb_img){
-//         etape = 0
-//     }
-//     enleverActiveImg()
-//     img_slider[etape].classList.add('active')
-// }, 5000)
+setInterval(function () {
+    etape++
+    if(etape >= nb_img){
+        etape = 0
+    }
+    enleverActiveImg()
+    img_slider[etape].classList.add('active')
+}, 5000)
 

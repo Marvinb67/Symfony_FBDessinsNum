@@ -16,7 +16,7 @@ class ActualiteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre', TextType::class)
+            ->add('titre', TextType::class, )
             ->add('contenue', TextareaType::class)
             ->add('actif', ChoiceType::class, [
                 'choices' => [

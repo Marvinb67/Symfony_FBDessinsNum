@@ -3,23 +3,25 @@
 {% block title %}Valider la commande{% endblock %}
 
 {% block body %}
-<div class="adresses">
-    <h2>Mes adresses</h2>
-    {{ form_start(formCommande) }}
+<div class="commande-container">
+    <div class="adresses">
+        <h2>Mes adresses</h2>
+        {{ form_start(formCommande) }}
         <div>
             {{ form_widget(formCommande.adresseLivraison) }}
         </div>
-    {{ form_end(formCommande) }}
-    <a href="{{ path('ajouter_adresse') }}" class="btn btn-success">Ajouter une adresse</a>
-</div>
+        {{ form_end(formCommande) }}
+        <a href="{{ path('ajouter_adresse') }}" class="btn btn-success">Ajouter une adresse</a>
+    </div>
 
-<div class="panier">
-    <h2>Votre commande</h2>
-    {% for item in panier %}
+    <div class="panier">
+        <h2>Votre commande</h2>
+        {% for item in panier %}
         <p>Produit : {{ item.produit }}</p>
         <p>Quantité : {{ item.qtt}}</p>
         <p>Prix unitaire : {{ item.produit.prix}} €</p>
-    {% endfor %}
-    <p>Total de la commande: {{ total }} €</p>
+        {% endfor %}
+        <p>Total de la commande: {{ total }} €</p>
+    </div>
 </div>
 {% endblock %}

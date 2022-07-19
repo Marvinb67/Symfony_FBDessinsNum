@@ -3,24 +3,23 @@
 {% block title %}Paiement{% endblock %}
 
 {% block body %}
-<h2>Adresse de livraison</h2>
-<div>
+<div class="adresses">
+    <h2>Adresse de livraison</h2>
     <p>{{ commande.nomComplet }}</p>
     <p>{{ commande.AdresseLivraison.adresse}}</p>
     <p>{{ commande.adresseLivraison.cp}}, {{ commande.adresseLivraison.ville }}</p>
     <p>{{ commande.adresselivraison.pays }}</p>
-    <p>Téléphone : {{ app.user.telephone }}</p>
 </div>
 
-<h2>Votre commande</h2>
-<div>
-    <p>Produits :</p>
+<div class="panier">
+    <h2>Votre commande</h2>
     {% for panier in paniers %}
-        <p>{{ panier.produit }}</p>
+        <p>{{ panier.produit }} X{{ panier.quantite }} | {{ panier.produit.prix }}€</p>
     {% endfor %}
-    <p>Total : {{ commande.prixTotal }}</p>
+    <hr>
+    <p>Total de la commande : {{ commande.prixTotal }}€</p>
 </div>
 <form action="/checkout" method="POST">
-    <button type="submit">Passer au paiement</button>
+    <button type="submit" class="btn btn-success mt-2 mb-2">Passer au paiement</button>
 </form>
 {% endblock %}

@@ -70,6 +70,12 @@ class PanierService
              ];
         }
 
+        $qttPanier = 0;
+
+        foreach ($datapanier as $produit) {
+            $qttPanier += $produit['qtt'];
+        }
+
         return $datapanier;
     }
 

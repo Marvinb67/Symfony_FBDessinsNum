@@ -16,15 +16,12 @@
                 {{ form_widget(registrationForm.email) }}
             </div>
             <div>
-                {{ form_widget(registrationForm.telephone) }}
-            </div>
-            <div>
                 {{ form_widget(registrationForm.plainPassword) }}
             </div>
             <div id="agreeTerms">
                 {{ form_row(registrationForm.agreeTerms) }}
             </div>
-                <button type="submit" class="btn-register">Inscription</button>
+                <button type="submit" class="btn btn-primary">Inscription</button>
             {{ form_end(registrationForm) }}
     </div>
 {% endblock %}

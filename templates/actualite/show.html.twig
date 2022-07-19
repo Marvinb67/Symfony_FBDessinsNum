@@ -8,10 +8,12 @@
     <h2>{{ actualite }}</h2>
     <small>{{ actualite.posterLe | date('d/m/Y H:i:s') }}</small>
     <p>{{ actualite.contenue }}</p>
+    {% if app.user %}
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Laisser un commentaire
     </button>
+    {% endif %}
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

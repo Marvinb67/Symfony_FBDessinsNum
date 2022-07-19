@@ -90,14 +90,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private $notes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Adresse::class, mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity=Adresse::class, mappedBy="utilisateur", orphanRemoval=true)
      */
     private $adresses;
-
-    /**
-     * @ORM\Column(type="string", length=20)
-     */
-    private $telephone;
 
     public function __construct()
     {
@@ -455,17 +450,5 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         return ''.$this->prenom.' '.$this->nom.'';
-    }
-
-    public function getTelephone(): ?string
-    {
-        return $this->telephone;
-    }
-
-    public function setTelephone(string $telephone): self
-    {
-        $this->telephone = $telephone;
-
-        return $this;
     }
 }

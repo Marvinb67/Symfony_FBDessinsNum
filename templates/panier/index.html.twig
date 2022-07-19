@@ -3,16 +3,14 @@
 {% block title %}Mon panier{% endblock %}
 
 {% block body %}
-<h1>Votre panier</h1>
+<h1 class="text-center">Votre panier</h1>
 
 <a class="btn" href="{{ path('index_boutique') }}">Continuer les achats</a>
 
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>Action</th>
-            <th>image</th>
-            <th>Nom</th>
+            <th colspan="2" class="text-center">Produit</th>
             <th>Prix</th>
             <th>Quantité</th>
             <th>Total</th>
@@ -21,12 +19,12 @@
     <tbody>
        {% for item in dataPanier %}
         <tr>
-            <td><a href="{{ path('supprimer_panier', {'id': item.produit.id}) }}" class="text-danger">Supprimer</a></td>
             <td><img src="{{ asset('image/dessins/' ~ item.produit.image) }}" alt="{{item.produit}}" style="width: 100px;"></td>
             <td><a href="{{ path('detail_produit', {'id': item.produit.id}) }}">{{ item.produit }}</a></td>
             <td>{{ item.produit.prix }} €</td>
             <td><a href="{{ path('retirer_panier', {'id': item.produit.id}) }}" class="text-danger">-</a> {{ item.qtt }} <a href="{{ path('ajout_panier', {'id': item.produit.id}) }}" class="text-success">+</a></td>
             <td>{{ item.qtt * item.produit.prix }}</td>
+            <td><a href="{{ path('supprimer_panier', {'id': item.produit.id}) }}" class="text-danger"><i class="fa-solid fa-trash-can"></i></a></td>
         </tr>
        {% else %}
             <tr>
@@ -34,14 +32,9 @@
             </tr>
        {% endfor %}
     </tbody>
-    <tfoot>
-        <tr>
-            <th scope="row" colspan="4">Total</th>
-            <td class="">{{ total }} €</td>
-        </tr>
-    </tfoot>
 </table>
-<p><a href="{{ path('vider') }}">Vider le panier</a> <a href="{{ path('validation_commande') }}" class="btn btn-success float-end">Confirmer la commande</a></p>
-
-{{ dump() }}
+<section class="text-end">
+    <p>Total du panier : {{ total }} €</p>
+</section>
+<p><a href="{{ path('vider') }}" class="btn btn-danger">Vider le panier</a> <a href="{{ path('validation_commande') }}" class="btn btn-success float-end">Confirmer la commande</a></p>
 {% endblock %}

@@ -19,18 +19,20 @@
         <li>Nom : {{ app.user.nom }} </li>
         <li>Prenom : {{ app.user.prenom }} </li>
         <li>Email : {{ app.user.email }} </li>
-        <li>Téléphone : {{ app.user.telephone }} </li>
         {% for adresse in app.user.adresses %}
             <li>Adresse : {{ adresse.adresse }} </li>
         {% endfor %}
     </ul>
     <a href="{{ path('modifier_compte')}}" class="btn btn-primary">Modifier le profil</a>
     <a href="{{ path('modifier_mdp') }}" class="btn btn-primary">Modifier le mot de passe</a>
-    <a href="{{path('commande')}}">Mes commandes</a>
     <!-- Button trigger modal -->
-<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Supprimer le compte
-</button>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Supprimer le compte
+    </button>
+    <div class="mt-2">
+      <a href="{{ path('commande')}}" class="btn btn-secondary">Mes commandes</a>
+      <a href="{{ path('favoris') }}" class="btn btn-secondary">Mes favoris</a>
+    </div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -45,7 +47,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <a class="btn btn-danger" href="{{ path('suppression_compte', {'id': app.user.id})}}">Supprimer</a>
+        <a class="btn btn-danger" href="{{ path('suppression_compte') }}">Supprimer</a>
       </div>
     </div>
   </div>

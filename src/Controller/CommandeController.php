@@ -43,11 +43,11 @@ class CommandeController extends AbstractController
         $em = $doctrine->getManager();
         $session = $requete->getSession();
         $panier = $session->get('panier');
-        
-        if(!$this->getUser()->getAdresses()->getValues()){
+
+        if (!$this->getUser()->getAdresses()->getValues()) {
             $this->redirectToRoute('ajouter_adresse');
         }
-        if(!$panier){
+        if (!$panier) {
             return $this->redirectToRoute('index_boutique');
         }
 

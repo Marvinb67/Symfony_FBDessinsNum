@@ -142,15 +142,14 @@ class PaiementController extends AbstractController
             'commande' => $commande,
         ]);
 
-        
         $dompdf->loadHtml($html);
-        
+
         $dompdf->setPaper('A4', 'portrait');
-        
+
         $dompdf->render();
-        
-        $dompdf->stream('mypdf.pdf', [
-            'Attachment' => false,
+
+        $dompdf->stream('Facture n°'.$commande->getFacture(), [
+            'Attachment' => true,
         ]);
 
         exit(0);
