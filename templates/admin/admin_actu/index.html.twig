@@ -3,9 +3,9 @@
 {% block title %}Admin Actualités{% endblock %}
 
 {% block body %}
-<h1>Actualités/h1>
+<h1>Actualités</h1>
 <h2>Il y a actuellement {{ actualites | length() }} actualités</h2>
-<a href="{{ path('ajout_actu') }}">Ajouter une actualités</a>
+<a href="{{ path('ajout_actu') }}">Ajouter une actualité</a>
 
 <table class="table table-striped">
     <thead>
@@ -13,7 +13,6 @@
             <th>Nom</th>
             <th>Image</th>
             <th>Contenue</th>
-            <th>Poster par</th>
             <th>Actif</th>
             <th>Action</th>
         </tr>
@@ -29,7 +28,6 @@
                     <td>Aucune image</td>
                 {% endif %}
                 <td>{{ actualite.contenue }}</td>
-                <td>{{ actualite.utilisateur }}</td>
                 <td>
                     <div class="form-check form-switch form-check-reverse">
                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse">

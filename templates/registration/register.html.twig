@@ -3,6 +3,10 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
+<div class="connexion">
+    <p>Déja inscrit ? <a href="{{ path('app_login') }}">Connectez-vous</a></p>
+    
+</div>
 <h2>INSCRIPTION</h2>
     <div class="register">
         {% for flash_error in app.flashes('verify_email_error') %}
@@ -19,7 +23,7 @@
                 {{ form_widget(registrationForm.plainPassword) }}
             </div>
             <div id="agreeTerms">
-                {{ form_row(registrationForm.agreeTerms) }}
+                <a href="https://www.privacypolicies.com/live/f66e0b95-a02b-4d2a-89b8-4b8dd9d68969">Mentions légales</a> {{ form_row(registrationForm.agreeTerms) }}
             </div>
                 <button type="submit" class="btn btn-primary">Inscription</button>
             {{ form_end(registrationForm) }}

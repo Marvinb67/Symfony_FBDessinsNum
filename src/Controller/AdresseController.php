@@ -45,7 +45,7 @@ class AdresseController extends AbstractController
             $em->persist($adresse);
             $em->flush();
 
-            return $this->redirectToRoute('commande');
+            return $this->redirectToRoute('validation_commande');
         }
 
         return $this->render('adresse/ajoutModif.html.twig', [

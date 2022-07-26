@@ -68,16 +68,70 @@ header{
     width: 100%;
 }
 
-a{
-    text-decoration: none;
-}
-
 ul{
     list-style: none;
 }
 
-header nav{
+a{
+    text-decoration: none;
+}
+
+.navbar{
     display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.liens-navbar{
+    height: 100%;
+}
+
+.liens-navbar ul{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.liens-navbar li a{
+    color: white;
+    padding: 1rem;
+}
+
+.bouton{
+    position: absolute;
+    top: .75rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+
+.bouton .trait{
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.boutons-navbar{
+    margin-right: 1em;
+}
+
+.boutons-navbar a{
+    padding: 2px 4px;
+    border: 1px solid #e91e63;
+    color: white;
+}
+
+/* 
+header nav{
+    height: 80px;
+    width: 100%;
+    /* display: flex;
     align-items: center;
     text-align: center;
     justify-content: space-around;
@@ -85,12 +139,13 @@ header nav{
 
 header a{
     color: white;
-}
+} */
 
-.logo img{
+.img-navbar img{
     width: 3em;
+    margin-left: 1em;
 }
-
+/* 
 .liens a{
     margin-right: 1em;
 }
@@ -101,12 +156,12 @@ header nav ul {
 
 header nav ul li{
     padding-right: 1em;
-}
+} */
 
-.header-button{
+/* .header-button{
     padding: 2px 4px;
     border: 1px solid #e91e63;
-}
+} */
 #register, #login-form{
     width: 100%;
     margin: 1em 0;
@@ -279,14 +334,20 @@ footer a{
 
 /* Responsive */
 
-@media screen and (min-width: 992px){
+@media screen and (max-width: 992px){
 
 }
 
-@media screen and (min-width: 768px){
+@media screen and (max-width: 768px){
     
+    .bouton{
+        display: flex;
+    }
+    
+    .liens-navbar{
+        display: none;
+    }
 }
 
-@media screen and (min-width: 576px){
-    
+@media screen and (max-width: 576px){
 }

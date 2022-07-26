@@ -1,141 +1,151 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Fayek Balhoul Dessins Numerique{% endblock %}</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-    {% block stylesheets %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Fayek Balhoul Dessins Numerique
+			{% endblock %}
+		</title>
+		<link
+		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		{% block stylesheets %}
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+			<link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+		{% endblock %}
 
-    {% block javascripts %}
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
-        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
-        integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
-        crossorigin="anonymous"></script>
-     
-    <script src="{{ asset('tarteaucitron/tarteaucitron.js') }}"></script>
+		{% block javascripts %}
+			<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
 
-    <script type="text/javascript">
-    tarteaucitron.init({
-        "privacyUrl": "", /* Privacy policy url */
-        "bodyPosition": "bottom", /* or top to bring it as first element for accessibility */
+			<script src="{{ asset('tarteaucitron/tarteaucitron.js') }}"></script>
 
-        "hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
-        "cookieName": "tarteaucitron", /* Cookie name */
+			<script type="text/javascript">
+				tarteaucitron.init({
+"privacyUrl": "", /* Privacy policy url */
+"bodyPosition": "bottom", /* or top to bring it as first element for accessibility */
 
-        "orientation": "middle", /* Banner position (top - bottom) */
-    
-        "groupServices": false, /* Group services by category */
-        "serviceDefaultState": "wait", /* Default state (true - wait - false) */
-                        
-        "showAlertSmall": false, /* Show the small banner on bottom right */
-        "cookieslist": false, /* Show the cookie list */
-                        
-        "closePopup": true, /* Show a close X on the banner */
+"hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
+"cookieName": "tarteaucitron", /* Cookie name */
 
-        "showIcon": true, /* Show cookie icon to manage cookies */
-        //"iconSrc": "", /* Optionnal: URL or base64 encoded image */
-        "iconPosition": "BottomLeft", /* BottomRight, BottomLeft, TopRight and TopLeft */
+"orientation": "middle", /* Banner position (top - bottom) */
 
-        "adblocker": false, /* Show a Warning if an adblocker is detected */
-                        
-        "DenyAllCta" : true, /* Show the deny all button */
-        "AcceptAllCta" : true, /* Show the accept all button when highPrivacy on */
-        "highPrivacy": true, /* HIGHLY RECOMMANDED Disable auto consent */
-                        
-        "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+"groupServices": false, /* Group services by category */
+"serviceDefaultState": "wait", /* Default state (true - wait - false) */
 
-        "removeCredit": false, /* Remove credit link */
-        "moreInfoLink": true, /* Show more info link */
+"showAlertSmall": false, /* Show the small banner on bottom right */
+"cookieslist": false, /* Show the cookie list */
 
-        "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
-        "useExternalJs": false, /* If false, the tarteaucitron.js file will be loaded */
+"closePopup": true, /* Show a close X on the banner */
 
-        //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
-                        
-        "readmoreLink": "", /* Change the default readmore link */
+"showIcon": true,
+/* Show cookie icon to manage cookies */
+// "iconSrc": "", /* Optionnal: URL or base64 encoded image */
+"iconPosition": "BottomLeft", /* BottomRight, BottomLeft, TopRight and TopLeft */
 
-        "mandatory": true, /* Show a message about mandatory cookies */
-        "mandatoryCta": true /* Show the disabled accept button when mandatory on */
-    });
-    </script>
-    {% endblock %}
-</head>
+"adblocker": false, /* Show a Warning if an adblocker is detected */
 
-<body>
-    <div id="grand-wrap">
-    <header>
-        {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-        {% endfor %}
-        <nav>
-            <div class="logo">
-                <a href="{{ path('acceuil') }}">
-                    <img src="{{ asset('image/logo/logo_white_fbdn.png') }}" alt="Logo FBDN">
-                </a>
-            </div>
-            <ul>
-                <li><a href="{{ path('index_boutique') }}">Boutique</a></li>
-                <li><a href="{{ path('actualite') }}">Actualités</a></li>
-                {% if is_granted('ROLE_ADMIN') %}
-                <li><a href="{{ path('admin') }}">Admin</a></li>
-                {% endif %}
-            </ul>
-            <div id="header-buttons">
-                {% if app.user %}
-                <a href="{{ path('panier') }}" id="panier"><i class="fa-solid fa-cart-shopping"></i></a>
-                <a href="{{ path('mon_compte') }}" class="header-button">Mon compte</a>
-                <a href="{{ path('app_logout') }}" class="header-button">Deconnexion</a>
-                {% else %}
-                <a href="{{ path('panier') }}" id="panier"><i class="fa-solid fa-cart-shopping"></i></a>
-                <a href="{{ path('app_register')}}" class="header-button">Inscription</a>
-                <a href="{{ path('app_login')}}" class="header-button">Connexion</a>
-                {% endif %}
-            </div>
-        </nav>
-    </header>
-    <div id="wrapper">
-        <main>
-            {% block body %}{% endblock %}
-        </main>
-    </div>
-    <footer>
-        <div class="footer-image">
-            <a href="{{ path('acceuil') }}"><img src="{{ asset('image/logo/logo_white_fbdn.png') }}" alt="logo" class="footer-img"></a>
-            <p>&copy; FBDessinNumerique, All rights reserved</p>
-        </div>
-        <div class="services">
-            <h3>Services</h3>
-            <ul>
-                <li><a href="{{ path('index_boutique') }}">Boutique</a></li>
-                <li><a href="{{ path('actualite') }}">Actualités</a></li>
-                <li><a href="{{ path('app_a_propos') }}">A propos</a></li>
-                <li><a href="">Contact</a></li>
-                <li><a href="https://www.privacypolicies.com/live/f66e0b95-a02b-4d2a-89b8-4b8dd9d68969">Condition générale d'utilisation</a></li>
-            </ul>
-        </div>
-        <div id="social">
-            <h3>Réseaux Sociaux</h3>
-            <ul>
-                <li><a href=""><i class="fa-brands fa-facebook-f"></i></a></li>
-                <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
-            </ul>
-        </div>
-    </footer>
-    </div>
-    
-    </div>
-</body>
+"DenyAllCta": true, /* Show the deny all button */
+"AcceptAllCta": true, /* Show the accept all button when highPrivacy on */
+"highPrivacy": true, /* HIGHLY RECOMMANDED Disable auto consent */
 
-</html>
+"handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+
+"removeCredit": false, /* Remove credit link */
+"moreInfoLink": true, /* Show more info link */
+
+"useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
+"useExternalJs": false,
+/* If false, the tarteaucitron.js file will be loaded */
+
+// "cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
+
+"readmoreLink": "", /* Change the default readmore link */
+
+"mandatory": true, /* Show a message about mandatory cookies */
+"mandatoryCta": true /* Show the disabled accept button when mandatory on */
+});
+			</script>
+		{% endblock %}
+	</head>
+
+	<body>
+		<div id="grand-wrap">
+			<header>
+				{% for message in app.flashes('success') %}
+					<div class="alert alert-success">
+						{{ message }}
+					</div>
+				{% endfor %}
+				<nav class="navbar">
+					<div class="img-navbar">
+						<img src="{{ asset('image/logo/logo_white_fbdn.png') }}" alt="Logo FBDN">
+					</div>
+					<a href="" class="bouton">
+						<span class="trait"></span>
+						<span class="trait"></span>
+						<span class="trait"></span>
+					</a>
+					<div class="liens-navbar">
+						<ul>
+							<li>
+								<a href="{{ path('index_boutique') }}">Boutique</a>
+							</li>
+							<li>
+								<a href="{{ path('actualite') }}">Actualités</a>
+							</li>
+							<li>
+								<a href="{{ path('panier') }}">Mon panier</a>
+							</li>
+							{% if is_granted('ROLE_ADMIN') %}
+								<li>
+									<a href="{{ path('admin') }}">Admin</a>
+								</li>
+							{% endif %}
+						</ul>
+					</div>
+					<div class="boutons-navbar">
+						{% if app.user %}
+							<a href="{{ path('mon_compte') }}" class="header-button">Mon compte</a>
+							<a href="{{ path('app_logout') }}" class="header-button">Deconnexion</a>
+						{% else %}
+							<a href="{{ path('app_register')}}" class="header-button">Inscription</a>
+							<a href="{{ path('app_login')}}" class="header-button">Connexion</a>
+						{% endif %}
+					</div>
+				</nav>
+			</header>
+			<div id="wrapper">
+				<main>
+					{% block body %}{% endblock %}
+				</main>
+			</div>
+			<footer>
+				<div class="footer-image">
+					<a href="{{ path('acceuil') }}"><img src="{{ asset('image/logo/logo_white_fbdn.png') }}" alt="logo" class="footer-img"></a>
+					<p>&copy; FBDessinNumerique, All rights reserved</p>
+				</div>
+				<div class="services">
+					<h3>Services</h3>
+					<ul>
+						<li><ahref="{{path('index_boutique')}}">Boutique</a></li>
+						<li><ahref="{{path('actualite')}}">Actualités</a></li>
+						<li><ahref="{{path('app_a_propos')}}">A propos</a></li>
+						<li><a href="">Contact</a></li>
+						<li><a href="https://www.privacypolicies.com/live/f66e0b95-a02b-4d2a-89b8-4b8dd9d68969">Condition
+															                            générale d'utilisation</a></li>
+					</ul>
+				</div>
+				<div id="social">
+					<h3>Réseaux Sociaux</h3>
+					<ul>
+						<li><a href=""><i class="fa-brands fa-facebook-f"></i></a></li>
+						<li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
+					</ul>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html></div></body></html>

@@ -3,12 +3,11 @@
 {% block title %}{{ actualite }}{% endblock %}
 
 {% block body %}
-<h1>Dernieres Acualités</h1>
 <div class="actu">
-    <h2>{{ actualite }}</h2>
+    <h1>{{ actualite }}</h1>
     <small>{{ actualite.posterLe | date('d/m/Y H:i:s') }}</small>
     <p>{{ actualite.contenue }}</p>
-    {% if app.user %}
+    {% if (app.user) or (is_granted('ROLE_ADMIN')) %}
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Laisser un commentaire
